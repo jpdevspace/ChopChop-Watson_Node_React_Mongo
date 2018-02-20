@@ -13,6 +13,7 @@ class App extends Component {
         <ul>
           <SearchResult />
         </ul>
+      
       </div>
     );
   }
