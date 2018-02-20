@@ -4,21 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-
-    <title>Speech color changer</title>
-
-    <link rel="stylesheet" href="style.css">
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Cheff W</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
   </head>
-
   <body>
-    <h1>Speech color changer</h1>
-
-    <p class="hints"></p>
-    <div>
-        <p class="output"><em>...diagnostic messages</em></p>
+    <div class="container">
+      <h1>Find the best recipes</h1>
+      <h2>Make them</h2>
+      <h3>...and don't let your screen suffer in the process</h3>
+      <div class="card bg-light mb-3">
+        <div class="card-header">Recipe Results</div>
+        <div class="card-body">
+          <h5 class="card-title">Title of recipe</h5>
+          <p id="hint" class="card-text"></p>
+          <div class="text-center">
+            <button type="button" class="btn btn-info mb-3">Search</button>
+          </div>
+          <hr />
+          <p id="output"></p>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
