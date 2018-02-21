@@ -6,11 +6,11 @@ import ResultItem from './ResultItem';
 class SearchResult extends Component {
   render() {
     let recipesResultItem = this.props.recipesResult.map((value, index) => {
-      return <ResultItem key={index} label={value.recipe.label} image={value.recipe.image} ingredients={value.recipe.ingredientLines} url={value.recipe.url} />
+      return <ResultItem key={value._id} title={value.title} image={value.src} ingredients={value.ingredients} instructions={value.instructions} />
     })
 
     return (
-        <li>{recipesResultItem}</li>
+        <ul>{recipesResultItem}</ul>
     );
   }
 }

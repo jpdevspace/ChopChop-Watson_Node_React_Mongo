@@ -4,12 +4,13 @@ class ResultItem extends Component {
   render() {
 
     return (
-        <div>
-            <h3>Label: {this.props.label}</h3>
-            <ul>Ingredients: {this.props.ingredients.map((value, index) => { return <li key={index}>{value}</li> })}</ul>
-            <p>Link: {this.props.url}</p>
+        <li>
+            <h3>Title: {this.props.title}</h3>
             <img src={this.props.image} alt="recipe" />
-        </div>
+            <h3>Ingredients:</h3><ul>{this.props.ingredients.map((value, index) => { return <li key={index}>{value}</li> })}</ul>
+            <h3>Instructions:</h3><ul>{this.props.instructions.map((value, index) => { return <li key={index}>{value}</li> })}</ul>
+            <hr />
+        </li>
     );
   }
 }

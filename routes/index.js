@@ -35,17 +35,9 @@ router.post('/createRecipe', (req, res) => {
 
 // Get recipes names from Edamam
 router.get('/search/:q', (req, res) => {
-    // Query search term
-    let query = req.params.q;
-    // Edamam API keys
-    let appID = process.env.EDAMAM_APP_ID;
-    let appKey = process.env.EDAMAM_APP_KEY;
-
-    axios.get(`https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}&from=0&to=10`)
-        .then( edamamRes => {
-            res.send(edamamRes.data.hits);
-        })
-        .catch(error => console.log(error))
+    Recipe.find({ keyword: req.params.q  })
+        .then(response => res.send(response))
+        .catch(err => console.error(err))
 });
 
 module.exports = router;

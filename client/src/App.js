@@ -27,18 +27,18 @@ class App extends Component {
         .join('')
       console.log(transcript);
       // Check for keywords
-      const ingredients = ['chicken recipes', 'meat recipes', 'pasta recipes', 'fish recipes', 'rice recipes'];
+      const ingredients = ['chicken', 'beef', 'pasta', 'fish'];
 
       // Check for matches to run the specific query
       ingredients.forEach(value => {
         if (transcript.includes(value)) {
           API.searchRecipes(value)
-            .then(edamamRes => {
+            .then(dbResponse => {
               let recipesCopy = this.state.recipes.slice();
-              edamamRes.data.forEach(value => recipesCopy.push(value))
+              dbResponse.data.forEach(value => recipesCopy.push(value))
               
               this.setState({ recipes: recipesCopy })
-              console.log(edamamRes.data)
+              console.log(dbResponse.data)
             })
             .catch(err => console.log(err))
         }
@@ -59,9 +59,8 @@ class App extends Component {
       <div className="container">
         <h1>Cheff W</h1>
         <Search manualSearch={this.handleManualSearch} />
-        <ul>
-          <SearchResult recipesResult={this.state.recipes} />
-        </ul>
+        <SearchResult recipesResult={this.state.recipes} />
+
       </div>
     );
   }
