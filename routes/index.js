@@ -6,6 +6,7 @@ require('dotenv').config();
 // Users model used for MongoDB
 // const Users = require('../models/Users');
 
+
 // Get recipes names from Edamam
 router.get('/search/:q', (req, res) => {
     // Query search term
