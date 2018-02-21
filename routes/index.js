@@ -15,7 +15,7 @@ router.get('/search/:q', (req, res) => {
     let appID = process.env.EDAMAM_APP_ID;
     let appKey = process.env.EDAMAM_APP_KEY;
 
-    axios.get(`https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}&from=0&to=2`)
+    axios.get(`https://api.edamam.com/search?q=${query}&app_id=${appID}&app_key=${appKey}&from=0&to=10`)
         .then( edamamRes => {
             res.send(edamamRes.data.hits);
         })

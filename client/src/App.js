@@ -60,7 +60,7 @@ class App extends Component {
         <h1>Cheff W</h1>
         <Search manualSearch={this.handleManualSearch} />
         <ul>
-          <SearchResult />
+          <SearchResult recipesResult={this.state.recipes} />
         </ul>
       </div>
     );
