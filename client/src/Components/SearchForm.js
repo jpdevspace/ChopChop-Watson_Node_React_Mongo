@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Utils
 import API from '../utils/API';
 
-class Search extends Component {
+class SearchForm extends Component {
   state = { query: '' }
 
   handleSearch = event => {
@@ -39,4 +39,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchForm;

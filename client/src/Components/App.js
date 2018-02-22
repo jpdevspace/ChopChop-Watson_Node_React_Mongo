@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 
 // Components
-import Search from './Components/Search';
-import SearchResult from './Components/SearchResults';
+import SearchForm from './SearchForm';
+import SearchResult from './SearchResults';
 
 // Utils
-import API from './utils/API';
+import API from '../utils/API';
 
 class App extends Component {
   state = {
@@ -60,7 +60,7 @@ class App extends Component {
 
     // Keep the Speech API open
     recognition.addEventListener('end', recognition.start);
-  
+    // Start speech API
     recognition.start();
   }
   
@@ -70,12 +70,13 @@ class App extends Component {
   render() {
     
     return (
+
       <div className="container">
         <h1>Cheff W</h1>
-        <Search manualSearch={this.handleManualSearch} />
+        <SearchForm manualSearch={this.handleManualSearch} />
         <SearchResult recipesResult={this.state.recipes} />
-
       </div>
+
     );
   }
 }
