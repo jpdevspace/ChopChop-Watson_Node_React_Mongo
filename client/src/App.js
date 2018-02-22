@@ -29,21 +29,32 @@ class App extends Component {
       // Check for keywords
       const ingredients = ['chicken', 'beef', 'pasta', 'fish'];
 
-      // Check for matches to run the specific query
-      ingredients.forEach(value => {
-        if (transcript.includes(value)) {
-          API.searchRecipes(value)
+      // Check for matches in ingredients to search for the recipe
+      ingredients.forEach(ingredient => {
+        if (transcript.includes(ingredient)) {
+          // Query the db looking for recipes with the spoken ingredient
+          API.searchRecipes(ingredient)
             .then(dbResponse => {
               // Clear the previous recipes, if any
               this.setState({recipes: []});
               let recipesCopy = this.state.recipes.slice();
-              dbResponse.data.forEach(value => recipesCopy.push(value))
+              dbResponse.data.forEach(ingredient => recipesCopy.push(ingredient))
               
               this.setState({ recipes: recipesCopy })
               console.log(dbResponse.data)
             })
             .catch(err => console.log(err))
         }
+
+        // Check for matches in commands to perform the action
+        if (transcript.includes('scroll down')) {
+         window.scrollBy(0, 100);
+        }
+        if (transcript.includes('scroll up' || 'scroll app')) {
+         window.scrollBy(0, -100);
+        }
+
+        
       })
     }
 
