@@ -34,6 +34,8 @@ class App extends Component {
         if (transcript.includes(value)) {
           API.searchRecipes(value)
             .then(dbResponse => {
+              // Clear the previous recipes, if any
+              this.setState({recipes: []});
               let recipesCopy = this.state.recipes.slice();
               dbResponse.data.forEach(value => recipesCopy.push(value))
               
@@ -46,7 +48,8 @@ class App extends Component {
     }
 
     // Keep the Speech API open
-    // recognition.onspeechend = () => recognition.start();
+    recognition.addEventListener('end', recognition.start);
+  
     recognition.start();
   }
   
