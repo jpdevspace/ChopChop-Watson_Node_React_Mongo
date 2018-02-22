@@ -33,6 +33,17 @@ router.post('/createRecipe', (req, res) => {
     res.redirect('/database');
 });
 
+// Handle user registration
+router.post('/register', (req, res) => {
+    console.log(req.body);
+    res.redirect('/')
+});
+
+// Handle user login
+router.post('/login', (req, res) => {
+    console.log(req.body);
+});
+
 // Get recipes names from Edamam
 router.get('/search/:q', (req, res) => {
     Recipe.find({ keyword: req.params.q  })
