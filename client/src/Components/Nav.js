@@ -29,7 +29,11 @@ class Nav extends Component {
                         <li><NavLink to="/">Search</NavLink></li>
                     </ul>
                 </nav>
-                <Register show={this.state.show} handleClose={this.handleClose} task={this.state.task} />
+                <Register 
+                    msg={this.props.msg}
+                    show={this.state.show} 
+                    handleClose={this.handleClose} 
+                    task={this.state.task} />
             </header>
         );
     }

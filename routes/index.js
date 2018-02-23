@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express')
 const router = express.Router();
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
+
 require('dotenv').config();
 // Users model used for MongoDB
 const Recipe = require('../models/Recipes');
@@ -36,7 +38,7 @@ router.post('/createRecipe', (req, res) => {
 
 // Handle user registration
 router.post('/register', (req, res) => {
-    console.log(req.body);
+    
     // If user is signing up
     if (req.body.name.length >= 1 ) {
         if(req.body.password === req.body.password2) {
@@ -45,9 +47,30 @@ router.post('/register', (req, res) => {
                 email: req.body.email,
                 password: req.body.password,
             }
-            User.create(newUser)
+            // Encrypting the password
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) { 
+                        let error = new Error(`Something went wrong: ${err}`);
+                        res.send(error);
+                    }
+                    // New password is hashed password
+                    newUser.password = hash;
+                    // Store hash in password DB
+                    User.create(newUser)
+                        .then(newUserDB => {
+                            let dbResponse = {
+                                dbResponse: dbResponse,
+                                message: 'New user created!'
+                            }
+                            res.send(dbResponse.message)
+                        })
+                        .catch(err => res.send(err))
+                })
+            })    
         }
         else {
+            // Return the err to the React FrontEnd to alert user
             res.send('Passwords do not match');
         }
 

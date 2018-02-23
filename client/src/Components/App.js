@@ -5,6 +5,7 @@ import './App.css';
 import SearchForm from './SearchForm';
 import SearchResult from './SearchResults';
 
+
 // Utils
 import API from '../utils/API';
 
@@ -72,6 +73,7 @@ class App extends Component {
     return (
 
       <div className="container">
+        
         <h1>Cheff W</h1>
         <SearchForm manualSearch={this.handleManualSearch} />
         <SearchResult recipesResult={this.state.recipes} />

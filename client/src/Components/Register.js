@@ -16,15 +16,15 @@ class Register extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit = e => {
     e.preventDefault();
     API.user(this.state)
-      .then(userRes => {
+      .then(response => {
         this.clearState();
-        console.log('ok')
+        this.props.handleClose(); // Close modal
+        this.props.msg(response.data);  // Alert user of any updates/errors
       })
       .catch(err => console.log(err))
   }
