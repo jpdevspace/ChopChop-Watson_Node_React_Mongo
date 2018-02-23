@@ -47,13 +47,35 @@ class Register extends Component {
           <Modal.Body>
             <form action={this.props.task === 'register' ? "/register" : "/login"} method="POST">
               <FormGroup>
-                <FormControl onChange={this.handleChange} value={this.state.email} name="email" type="email" placeholder="Enter email" />
-                <FormControl onChange={this.handleChange} value={this.state.password} name="password" type="password" placeholder="Enter password" />
+                <FormControl 
+                  onChange={this.handleChange} 
+                  value={this.state.email} 
+                  name="email" 
+                  type="email" 
+                  placeholder="Enter email" />
+                <FormControl 
+                  onChange={this.handleChange} 
+                  value={this.state.password} 
+                  name="password" 
+                  type="password" 
+                  placeholder="Enter password" />
+
+                {/* If user chose registration show following extra fields */}
                 {this.props.task === 'register' 
                   ?
                     <span>
-                      <FormControl onChange={this.handleChange} value={this.state.password2} name="password2" type="password" placeholder="Confirm password" />
-                      <FormControl onChange={this.handleChange} value={this.state.name} name="name" type="text" placeholder="Enter name" />
+                      <FormControl 
+                        onChange={this.handleChange} 
+                        value={this.state.password2} 
+                        name="password2" 
+                        type="password" 
+                        placeholder="Confirm password" />
+                      <FormControl 
+                        onChange={this.handleChange} 
+                        value={this.state.name} 
+                        name="name" 
+                        type="text" 
+                        placeholder="Enter name" />
                     </span>
                   : 
                     null

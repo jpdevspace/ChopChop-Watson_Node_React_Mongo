@@ -5,6 +5,7 @@ const axios = require('axios');
 require('dotenv').config();
 // Users model used for MongoDB
 const Recipe = require('../models/Recipes');
+const User = require('../models/Users');
 
 // Route to create recipes
 router.get('/database', (req, res) => {
@@ -36,12 +37,24 @@ router.post('/createRecipe', (req, res) => {
 // Handle user registration
 router.post('/register', (req, res) => {
     console.log(req.body);
-    res.redirect('/')
-});
+    // If user is signing up
+    if (req.body.name.length >= 1 ) {
+        if(req.body.password === req.body.password2) {
+            const newUser = {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+            }
+            User.create(newUser)
+        }
+        else {
+            res.send('Passwords do not match');
+        }
 
-// Handle user login
-router.post('/login', (req, res) => {
-    console.log(req.body);
+    }
+    else {
+        console.log('user wants to login')
+    }
 });
 
 // Get recipes names from Edamam
