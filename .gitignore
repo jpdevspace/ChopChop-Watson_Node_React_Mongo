@@ -22,5 +22,5 @@ yarn-error.log*
 # dotenv env variables
 .env
 
-# Cheff Static
-/cheff
+# Config
+/config

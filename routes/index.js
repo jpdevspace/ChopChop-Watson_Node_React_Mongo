@@ -1,10 +1,13 @@
+const passport = require('passport');
 const path = require('path');
 const express = require('express')
 const router = express.Router();
 const axios = require('axios');
 const bcrypt = require('bcryptjs');
 
+require('../config/passport')(passport);
 require('dotenv').config();
+
 // Users model used for MongoDB
 const Recipe = require('../models/Recipes');
 const User = require('../models/Users');
@@ -36,11 +39,11 @@ router.post('/createRecipe', (req, res) => {
     res.redirect('/database');
 });
 
-// Handle user registration
-router.post('/register', (req, res) => {
-    
-    // If user is signing up
-    if (req.body.name.length >= 1 ) {
+// Handle user registration/login
+router.post('/register', (req, res, next) => {
+    // Check that all fields are filled out
+    if( req.body.name && req.body.email && req.body.password && req.body.password2) {
+        // Check that passwords match
         if(req.body.password === req.body.password2) {
             const newUser = {
                 name: req.body.name,
@@ -58,27 +61,24 @@ router.post('/register', (req, res) => {
                     newUser.password = hash;
                     // Store hash in password DB
                     User.create(newUser)
-                        .then(newUserDB => {
-                            let dbResponse = {
-                                dbResponse: dbResponse,
-                                message: 'New user created!'
-                            }
-                            res.send(dbResponse.message)
-                        })
+                        .then(newUserDB => res.send('New user created!'))
                         .catch(err => res.send(err))
                 })
             })    
         }
-        else {
-            // Return the err to the React FrontEnd to alert user
-            res.send('Passwords do not match');
-        }
-
+        else { res.send('Passwords do not match'); }
     }
-    else {
-        console.log('user wants to login')
-    }
+    else { res.send("Please fill all the fields"); }
+    
 });
+
+// Handles user login process and authentication
+router.post('/login', 
+    passport.authenticate('local.signin'),
+        (req, res) => {     
+            res.send("You are logged in");
+        }
+);
 
 // Get recipes names from Edamam
 router.get('/search/:q', (req, res) => {

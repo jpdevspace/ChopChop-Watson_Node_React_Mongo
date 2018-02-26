@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 
 class Messages extends Component {
-    state = { message: ''}
+    state = { message: '' }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(props) {
+        this.setState({ message: props.msg })
         this.clearMsg();
     }
 
     clearMsg = () => {
         console.log("clearing");
-        window.setTimeout(this.setState({message: ''}), 3000);
+        //window.setTimeout( () => this.setState({ message: '' }), 3000);
     }
 
     render() {
         return(
             <div className="messages">
-                {this.props.msg ? <p>{this.props.msg}</p> : null }
+               {this.state.message}
             </div>
         );
     }

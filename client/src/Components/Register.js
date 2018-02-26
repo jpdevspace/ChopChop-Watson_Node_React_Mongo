@@ -9,7 +9,7 @@ class Register extends Component {
     name: '',
     email: '', 
     password: '', 
-    password2: ''
+    password2: '',
   }
 
   handleChange = e => {
@@ -20,13 +20,29 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    API.user(this.state)
-      .then(response => {
-        this.clearState();
-        this.props.handleClose(); // Close modal
-        this.props.msg(response.data);  // Alert user of any updates/errors
-      })
-      .catch(err => console.log(err))
+    if (this.props.task === 'register') {
+      API.userRegistration(this.state)
+        .then(response => {
+          this.clearState();
+          this.props.handleClose(); // Close modal
+          this.props.msg(response.data);  // Alert user of any updates/errors
+        })
+        .catch(err => console.log(err))
+    }
+    else {
+      const userLogin = {
+        email: this.state.email,
+        password: this.state.password
+      }
+      API.userLogin(userLogin)
+        .then(response => {
+          this.clearState();
+          this.props.handleClose(); // Close modal
+          this.props.msg(response.data);  // Alert user of any updates/errors
+        })
+        .catch(err => console.log(err))
+    }
+    
   }
 
   clearState = () => {
