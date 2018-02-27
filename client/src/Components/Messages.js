@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Messages extends Component {
+    
     state = { message: '' }
 
     componentWillReceiveProps(props) {
@@ -10,7 +11,7 @@ class Messages extends Component {
 
     clearMsg = () => {
         console.log("clearing");
-        //window.setTimeout( () => this.setState({ message: '' }), 3000);
+        window.setTimeout( () => this.setState({ message: '' }), 3000);
     }
 
     render() {

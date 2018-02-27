@@ -16,6 +16,8 @@ class Router extends Component {
         this.setState({ message: msg })
     }
 
+
+
     render() {
         return(
             <BrowserRouter>

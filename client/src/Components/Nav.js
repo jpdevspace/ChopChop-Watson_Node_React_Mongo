@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 import Register from './Register';
 
 class Nav extends Component {
     state = { 
         show: false, 
-        task: ''
+        task: '',
+        isAuth: false
     }
 
     handleShow = () => {
@@ -17,6 +18,9 @@ class Nav extends Component {
     }
     handleTask = task => {
         this.setState({ task: task })
+    }
+    handleAuth = () => {
+        this.setState({ isAuth: true })
     }
 
     render() {
@@ -29,11 +33,17 @@ class Nav extends Component {
                         <li><NavLink to="/">Search</NavLink></li>
                     </ul>
                 </nav>
-                <Register 
-                    msg={this.props.msg}
-                    show={this.state.show} 
-                    handleClose={this.handleClose} 
-                    task={this.state.task} />
+                    {this.state.isAuth ? <Redirect to="/user" /> 
+                        : 
+                        <Register 
+                            msg={this.props.msg}
+                            auth={this.handleAuth}
+                            show={this.state.show} 
+                            handleClose={this.handleClose} 
+                            task={this.state.task} />
+                    }
+
+                
             </header>
         );
     }

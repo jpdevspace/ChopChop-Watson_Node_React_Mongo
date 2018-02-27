@@ -76,7 +76,7 @@ router.post('/register', (req, res, next) => {
 router.post('/login', 
     passport.authenticate('local.signin'),
         (req, res) => {     
-            res.send("You are logged in");
+            res.send(req.user);
         }
 );
 

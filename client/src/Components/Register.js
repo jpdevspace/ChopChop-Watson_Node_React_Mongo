@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, FormGroup, FormControl } from 'react-bootstrap';
 
+
 // Utils
 import API from '../utils/API';
 
@@ -9,7 +10,7 @@ class Register extends Component {
     name: '',
     email: '', 
     password: '', 
-    password2: '',
+    password2: ''
   }
 
   handleChange = e => {
@@ -21,7 +22,13 @@ class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.props.task === 'register') {
-      API.userRegistration(this.state)
+      const userRegistration = {
+        name: this.state.name,
+        email: this.state.email, 
+        password: this.state.password, 
+        password2: this.state.password2
+      }
+      API.userRegistration(userRegistration)
         .then(response => {
           this.clearState();
           this.props.handleClose(); // Close modal
@@ -36,13 +43,14 @@ class Register extends Component {
       }
       API.userLogin(userLogin)
         .then(response => {
+          console.log(response)
           this.clearState();
           this.props.handleClose(); // Close modal
-          this.props.msg(response.data);  // Alert user of any updates/errors
+          this.props.msg('User logged in');  // Alert user of any updates/errors
+          this.props.auth();   // Activate auth mode
         })
         .catch(err => console.log(err))
     }
-    
   }
 
   clearState = () => {
@@ -55,6 +63,7 @@ class Register extends Component {
   }
 
   render() {
+
     return (
         <Modal show={this.props.show} onHide={this.props.handleClose}>
           <Modal.Header closeButton>
