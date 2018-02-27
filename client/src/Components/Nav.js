@@ -7,7 +7,7 @@ class Nav extends Component {
     state = { 
         show: false, 
         task: '',
-        isAuth: false
+        isAuth: this.props.auth
     }
 
     handleShow = () => {
@@ -20,24 +20,36 @@ class Nav extends Component {
         this.setState({ task: task })
     }
     handleAuth = () => {
-        this.setState({ isAuth: true })
+        this.setState({isAuth: true});
+        this.props.auth('true');
     }
+    handleSignOut = () => {
+        this.setState({ isAuth: false });
+        this.props.auth('false');
+    }
+
 
     render() {
         return(
             <header>
                 <nav>
                     <ul>
-                        <li onClick={() => { this.handleShow(); this.handleTask('login') }} >Login</li>
-                        <li onClick={() => { this.handleShow(); this.handleTask('register') }} >Sign up</li>
+                        {this.state.isAuth === true ? <li onClick={this.handleSignOut} >Sign out</li> :
+                        <span>
+                            <li onClick={() => { this.handleShow(); this.handleTask('login') }} >Login</li>
+                            <li onClick={() => { this.handleShow(); this.handleTask('register') }} >Sign up</li>
+                        </span>
+                    }
+
                         <li><NavLink to="/">Search</NavLink></li>
                     </ul>
                 </nav>
-                    {this.state.isAuth ? <Redirect to="/user" /> 
+                    {this.state.isAuth === true ? <Redirect to="/user" /> 
                         : 
                         <Register 
                             msg={this.props.msg}
-                            auth={this.handleAuth}
+                            onAuth={this.handleAuth}
+                            user={this.props.user}
                             show={this.state.show} 
                             handleClose={this.handleClose} 
                             task={this.state.task} />

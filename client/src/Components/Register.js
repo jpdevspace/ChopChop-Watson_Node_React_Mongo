@@ -47,7 +47,8 @@ class Register extends Component {
           this.clearState();
           this.props.handleClose(); // Close modal
           this.props.msg('User logged in');  // Alert user of any updates/errors
-          this.props.auth();   // Activate auth mode
+          this.props.onAuth();   // Activate auth mode
+          this.props.user(response.data);
         })
         .catch(err => console.log(err))
     }

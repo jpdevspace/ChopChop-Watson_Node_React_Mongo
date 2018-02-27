@@ -9,23 +9,37 @@ import Nav from './Components/Nav';
 
 class Router extends Component {
     state = {
-        message: ''
+        message: '',
+        isAuth: false,
+        currentUser: {}
     }
 
     handleMessages = msg => {
         this.setState({ message: msg })
     }
 
-
+    handleAuth = authStatus => {
+        this.setState({ isAuth: authStatus })
+    }
+    
+    getCurrentUser = user => {
+        this.setState({ currentUser: user })
+    }
 
     render() {
         return(
             <BrowserRouter>
                 <div>
                     <Messages msg={this.state.message} />
-                    <Nav msg={this.handleMessages} />
-                    <Route exact path="/" component={App} /> 
-                    <Route path="/user" component={User} />
+                    <Nav 
+                        auth={this.handleAuth} 
+                        isAuth={this.state.isAuth} 
+                        msg={this.handleMessages}
+                        user={this.getCurrentUser} />
+                    <Route exact path="/" component={App} />
+                    <Route path="/user" 
+                        render={ () => <User user={this.state.currentUser} /> } /> 
+                    
                 </div>
             </BrowserRouter>
         );

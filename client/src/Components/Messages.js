@@ -10,7 +10,6 @@ class Messages extends Component {
     }
 
     clearMsg = () => {
-        console.log("clearing");
         window.setTimeout( () => this.setState({ message: '' }), 3000);
     }
 
