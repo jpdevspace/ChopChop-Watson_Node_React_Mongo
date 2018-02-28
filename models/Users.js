@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     name: {
         type: String, 
         required: true
@@ -17,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     },
     recipes: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "Recipes" 
         }
     ]

@@ -9,7 +9,7 @@ require('../config/passport')(passport);
 require('dotenv').config();
 
 // Users model used for MongoDB
-const Recipe = require('../models/Recipes');
+const Recipes = require('../models/Recipes');
 const User = require('../models/Users');
 
 // Route to create recipes
@@ -32,7 +32,7 @@ router.post('/createRecipe', (req, res) => {
         instructions: newInstructionsArr
     }
 
-    Recipe.create(newRecipe)
+    Recipes.create(newRecipe)
         .then(res => console.log(res))
         .catch(err => console.error(err))
     
@@ -89,9 +89,17 @@ router.put('/save/:userId/:recipeId', (req, res) => {
         .catch(err => console.error(err))
 });
 
+// Display all recipes from a specific user
+router.get('/recipes/:userId', (req, res) => {
+    User.findById(req.params.userId)
+        .populate("recipes")
+        .then(userRecipes => res.json(userRecipes))
+        .catch(err => console.error(err))
+})
+
 // Get recipes from Database
 router.get('/search/:q', (req, res) => {
-    Recipe.find({ keyword: req.params.q  })
+    Recipes.find({ keyword: req.params.q  })
         .then(response => res.send(response))
         .catch(err => console.error(err))
 });
