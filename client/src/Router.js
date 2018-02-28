@@ -36,9 +36,10 @@ class Router extends Component {
                         isAuth={this.state.isAuth} 
                         msg={this.handleMessages}
                         user={this.getCurrentUser} />
-                    <Route exact path="/" component={App} />
+                    <Route exact path="/" 
+                        render={ () => <App user={this.state.currentUser} />}  />
                     <Route path="/user" 
-                        render={ () => <User user={this.state.currentUser} /> } /> 
+                        render={ () => <User isAuth={this.state.isAuth} user={this.state.currentUser} /> } /> 
                     
                 </div>
             </BrowserRouter>

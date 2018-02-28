@@ -8,11 +8,13 @@ class SearchResult extends Component {
     let recipesResultItem = this.props.recipesResult.map((value, index) => {
       return  (
                 <ResultItem 
-                  key={value._id} 
+                  key={value._id}
+                  recipe_id={value._id} 
                   title={value.title} 
                   image={value.src} 
                   ingredients={value.ingredients} 
-                  instructions={value.instructions} />
+                  instructions={value.instructions} 
+                  user={this.props.user} />
               );
     })
 

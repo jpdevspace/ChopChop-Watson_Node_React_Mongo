@@ -76,7 +76,7 @@ class App extends Component {
         
         <h1>Cheff W</h1>
         <SearchForm manualSearch={this.handleManualSearch} />
-        <SearchResult recipesResult={this.state.recipes} />
+        <SearchResult user={this.props.user} recipesResult={this.state.recipes} />
       </div>
 
     );

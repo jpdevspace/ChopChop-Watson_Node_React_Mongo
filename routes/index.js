@@ -39,7 +39,7 @@ router.post('/createRecipe', (req, res) => {
     res.redirect('/database');
 });
 
-// Handle user registration/login
+// Handle user registration
 router.post('/register', (req, res, next) => {
     // Check that all fields are filled out
     if( req.body.name && req.body.email && req.body.password && req.body.password2) {
@@ -80,7 +80,16 @@ router.post('/login',
         }
 );
 
-// Get recipes names from Edamam
+// Handle saving recipes
+router.put('/save/:userId/:recipeId', (req, res) => {
+    User.findByIdAndUpdate(req.params.userId, {
+        $push: { recipes: (req.params.recipeId) }
+    }, { new: true })
+        .then(updatedUser => res.send('Recipe Save'))
+        .catch(err => console.error(err))
+});
+
+// Get recipes from Database
 router.get('/search/:q', (req, res) => {
     Recipe.find({ keyword: req.params.q  })
         .then(response => res.send(response))
