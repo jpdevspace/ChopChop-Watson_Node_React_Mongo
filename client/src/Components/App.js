@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import * as actionTypes from '../store/actions';
 
 // Components
-import Nav from './Nav';
-import SearchBar from './Search/SearchBar';
-import RecipesList from './Search/RecipesList';
+import Layout from './Layout';
+import SearchMain from './Search/SearchMain';
+import Signin from './Containers/Auth/Signin';
 
 // Utils
 import API from '../utils/API';
@@ -62,13 +63,17 @@ class App extends Component {
     }
 
     render() {
+        const routes = (
+            <Switch>
+                <Route exact path="/" render={() => <SearchMain onSearch={this.handleRecipesSearch} />} />
+                <Route path="/signin" component={Signin} />
+            </Switch>
+        )
+
         return (
-            <div className="container">
-                <Nav />
-                <h1>Cheff W</h1>
-                <SearchBar onSearch={this.handleRecipesSearch} />
-                <RecipesList recipes={this.props.rcpes} />
-            </div>
+            <Layout>
+                {routes}
+            </Layout>
         );
     }
 }
