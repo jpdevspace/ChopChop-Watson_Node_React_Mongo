@@ -4,7 +4,7 @@ export default {
     // Find recipes from DB
     searchRecipes: query => axios.get(`/search/${query}`),
     // User registration
-    userRegistration: query => axios.post('/register', query),
+    userSignup: query => axios.post('/signup', query),
     // User login
     userLogin:  query => axios.post('/login', query),
     // Save recipes

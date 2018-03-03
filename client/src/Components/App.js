@@ -8,16 +8,12 @@ import * as actionTypes from '../store/actions';
 // Components
 import Layout from './Layout';
 import SearchMain from './Search/SearchMain';
-import Signin from './Containers/Auth/Signin';
+import Signup from './Containers/Auth/Signup';
 
-// Utils
+// AXIOS
 import API from '../utils/API';
 
 class App extends Component {
-    // state = {
-    //     recipes: [],
-    // }
-
     // Activate SpeechRecognition on page load to always be listening
     componentDidMount() {
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -66,7 +62,7 @@ class App extends Component {
         const routes = (
             <Switch>
                 <Route exact path="/" render={() => <SearchMain onSearch={this.handleRecipesSearch} />} />
-                <Route path="/signin" component={Signin} />
+                <Route path="/signup" component={Signup} />
             </Switch>
         )
 

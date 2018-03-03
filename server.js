@@ -39,7 +39,6 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-
 // Setting up a port
 const PORT = process.env.PORT || 3001;
 
