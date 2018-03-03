@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // Components
 import Recipe from './Recipe';
-import SaveRecipe from './SaveRecipe';
 
 class ResultItem extends Component {
   state = { active: false };
@@ -21,7 +20,6 @@ class ResultItem extends Component {
               {!this.state.active ? "Cook Recipe " : "Close Recipe "}
               <i className="fas fa-utensil-spoon"></i>
             </button>
-            <SaveRecipe user={this.props.user} recipe_id={this.props.recipe_id} />
             <br />
             {this.state.active 
               ?
