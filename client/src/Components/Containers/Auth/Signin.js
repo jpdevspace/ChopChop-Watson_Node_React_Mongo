@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../../store/index';
 
-class Signup extends Component {
+class Signin extends Component {
 
     state = {
-        name: '',
         email: '',
         password: ''
     }
@@ -21,23 +20,14 @@ class Signup extends Component {
     // Submit the user typed email and password for authentication 
     submitHandler = e => {
         e.preventDefault();
-        this.props.onAuth(this.state.name, this.state.email, this.state.password);
+        this.props.onAuth(this.state.email, this.state.password);
     }
 
     render() {
         return (
             <div>
-                <h2 className="text-center">Sign up</h2>
+                <h2 className="text-center">Login</h2>
                 <form onSubmit={this.submitHandler}>
-                    <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="name" 
-                            type="text" 
-                            className="form-control" 
-                            placeholder="Name" />
-                    </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input 
@@ -56,7 +46,7 @@ class Signup extends Component {
                             className="form-control"  
                             placeholder="Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary">Sign up</button>
+                    <button type="submit" className="btn btn-primary">Login</button>
                 </form>
             </div>
                         
@@ -66,8 +56,8 @@ class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (name, email, password) => dispatch(actions.authSignUp(name, email, password))
+        onAuth: (email, password) => dispatch(actions.authSignIn(email, password))
     }
 }
                 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(Signin);

@@ -6,7 +6,7 @@ export default {
     // User registration
     userSignup: query => axios.post('/signup', query),
     // User login
-    userLogin:  query => axios.post('/login', query),
+    userLogin:  query => axios.post('/signin', query),
     // Save recipes
     saveRecipe: (userId, recipeId) => axios.put(`/${userId}/save/${recipeId}`),
     // Get User's Recipes

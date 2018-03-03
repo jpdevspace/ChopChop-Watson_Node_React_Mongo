@@ -9,6 +9,7 @@ import * as actionTypes from '../store/actions';
 import Layout from './Layout';
 import SearchMain from './Search/SearchMain';
 import Signup from './Containers/Auth/Signup';
+import Signin from './Containers/Auth/Signin';
 
 // AXIOS
 import API from '../utils/API';
@@ -63,6 +64,7 @@ class App extends Component {
             <Switch>
                 <Route exact path="/" render={() => <SearchMain onSearch={this.handleRecipesSearch} />} />
                 <Route path="/signup" component={Signup} />
+                <Route path="/signin" component={Signin} />
             </Switch>
         )
 
