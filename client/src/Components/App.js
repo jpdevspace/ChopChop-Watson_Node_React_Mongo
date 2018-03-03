@@ -59,16 +59,13 @@ class App extends Component {
     }
 
     render() {
-
         return (
-
             <div className="container">
                 <Nav />
                 <h1>Cheff W</h1>
                 <SearchForm onSearch={this.handleRecipesSearch} />
-                <SearchResult recipesResult={this.state.recipes} />
+                <SearchResult recipes={this.state.recipes} />
             </div>
-
         );
     }
 }
