@@ -3,8 +3,8 @@ import './App.css';
 
 // Components
 import Nav from './Nav';
-import SearchForm from './SearchForm';
-import SearchResult from './SearchResults';
+import SearchBar from './Search/SearchBar';
+import RecipesList from './Search/RecipesList';
 
 // Utils
 import API from '../utils/API';
@@ -63,8 +63,8 @@ class App extends Component {
             <div className="container">
                 <Nav />
                 <h1>Cheff W</h1>
-                <SearchForm onSearch={this.handleRecipesSearch} />
-                <SearchResult recipes={this.state.recipes} />
+                <SearchBar onSearch={this.handleRecipesSearch} />
+                <RecipesList recipes={this.state.recipes} />
             </div>
         );
     }

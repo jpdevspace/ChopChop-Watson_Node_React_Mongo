@@ -1,12 +1,12 @@
 import React from 'react';
 
 // Components
-import ResultItem from './ResultItem';
+import Recipe from './Recipe';
 
-const SearchResult = props => {
-    let recipesResultItem = props.recipes.map((value, index) => {
+const RecipesList = props => {
+    let recipe = props.recipes.map((value, index) => {
         return (
-            <ResultItem
+            <Recipe
                 key={value._id}
                 recipe_id={value._id}
                 title={value.title}
@@ -18,8 +18,8 @@ const SearchResult = props => {
     })
 
     return (
-        <ul>{recipesResultItem}</ul>
+        <ul>{recipe}</ul>
     );
 }
 
-export default SearchResult;
+export default RecipesList;

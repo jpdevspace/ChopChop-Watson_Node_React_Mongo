@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 // Components
-import Recipe from './Recipe';
+import RecipeInstructions from './RecipeInstructions';
 
-class ResultItem extends Component {
+class Recipe extends Component {
     state = { active: false };
 
     activeRecipe = () => {
@@ -19,12 +19,13 @@ class ResultItem extends Component {
                     {!this.state.active ? "Cook Recipe " : "Close Recipe "}
                     <i className="fas fa-utensil-spoon"></i>
                 </button>
+                <br />
                 <img src={this.props.image} alt="recipe" />
 
                 <br />
                 {this.state.active
                     ?
-                    <Recipe
+                    <RecipeInstructions
                         onClose={this.activeRecipe}
                         ingredients={this.props.ingredients}
                         instructions={this.props.instructions} />
@@ -38,4 +39,4 @@ class ResultItem extends Component {
     }
 }
 
-export default ResultItem;
+export default Recipe;

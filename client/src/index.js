@@ -1,5 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './Components/App';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './Components/App';
+import reducer from './store/reducer';
+
+// Creating store
+const store = createStore(reducer)
+
+const app = (
+    <Provider store={store}>
+        <BrowserRouter>
+            <Route exact path="/" component={App} />
+        </BrowserRouter>
+    </Provider>
+);
+
+ReactDOM.render(app, document.getElementById('root'));

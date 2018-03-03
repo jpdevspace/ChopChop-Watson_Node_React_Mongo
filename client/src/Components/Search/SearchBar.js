@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SearchForm extends Component {
+class SearchBar extends Component {
     state = { ingredient: '' }
 
     render() {
@@ -23,4 +23,4 @@ class SearchForm extends Component {
     }
 }
 
-export default SearchForm;
+export default SearchBar;

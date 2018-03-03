@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Recipe extends Component {
+class RecipeInstructions extends Component {
   render() {
 
     const ingredient = this.props.ingredients.map(
@@ -43,4 +43,4 @@ class Recipe extends Component {
   }
 }
 
-export default Recipe;
+export default RecipeInstructions;
