@@ -1,52 +1,50 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as actions from '../../../store/index';
 
 class Signin extends Component {
-    // state = {
-    //     controls: {
-    //         email: {
-    //             elementType: 'input',
-    //             elementConfig: {
-    //                 type: 'email',
-    //                 placeholder: 'Email',
-    //             },
-    //             value: '',
-    //             validation: {
-    //                 required: true,
-    //                 isEmail: true
-    //             },
-    //             valid: false,
-    //             touched: false
-    //         },
-    //         password: {
-    //             elementType: 'input',
-    //             elementConfig: {
-    //                 type: 'password',
-    //                 placeholder: 'Password',
-    //             },
-    //             value: '',
-    //             validation: {
-    //                 required: true,
-    //                 minLength: 3
-    //             },
-    //             valid: false,
-    //             touched: false
-    //         }
 
-    //     }
-    // }
+    state = {
+        email: '',
+        password: ''
+    }
+
+    // Function to update both email or password when the input is changed
+    onInputChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    // Submit the user typed email and password for authentication 
+    submitHandler = e => {
+        e.preventDefault();
+        this.props.onAuth(this.state.email, this.state.password);
+    }
 
     render() {
         return (
             <div>
                 <h2 className="text-center">Login</h2>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     <div className="form-group">
                         <label htmlFor="email">Email address</label>
-                        <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                        <input 
+                            onChange={this.onInputChange} 
+                            name="email" 
+                            type="email" 
+                            className="form-control" 
+                            placeholder="Enter email" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" id="password" placeholder="Password" />
+                        <input 
+                            onChange={this.onInputChange} 
+                            name="password" 
+                            type="password" 
+                            className="form-control"  
+                            placeholder="Password" />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
@@ -55,5 +53,11 @@ class Signin extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(actions.auth(email, password))
+    }
+}
                 
-export default Signin;
+export default connect(null, mapDispatchToProps)(Signin);
