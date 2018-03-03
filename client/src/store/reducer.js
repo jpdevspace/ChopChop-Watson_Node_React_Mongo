@@ -1,13 +1,19 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-    ingredient: '',
-    recipes: [],
-    command: ''
+    recipes: []
 }
 
 const reducer = (state = initialState, action) => {
-
+    switch (action.type) {
+        case actionTypes.SEARCH_RECIPE:
+            return {
+                ...state,
+                recipes: action.payload
+            }
+        default: 
+            return state;
+    }
 };
 
 export default reducer;

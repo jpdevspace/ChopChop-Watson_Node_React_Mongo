@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import './App.css';
+import * as actionTypes from '../store/actions';
 
 // Components
 import Nav from './Nav';
@@ -10,9 +13,9 @@ import RecipesList from './Search/RecipesList';
 import API from '../utils/API';
 
 class App extends Component {
-    state = {
-        recipes: [],
-    }
+    // state = {
+    //     recipes: [],
+    // }
 
     // Activate SpeechRecognition on page load to always be listening
     componentDidMount() {
@@ -53,7 +56,7 @@ class App extends Component {
         API.searchRecipes(ingredient)
             .then(dbResponse => {
                 const recipes = dbResponse.data;
-                this.setState({ recipes });
+                this.props.onSearchRecipe(recipes);
             })
             .catch(err => console.log(err))
     }
@@ -64,10 +67,22 @@ class App extends Component {
                 <Nav />
                 <h1>Cheff W</h1>
                 <SearchBar onSearch={this.handleRecipesSearch} />
-                <RecipesList recipes={this.state.recipes} />
+                <RecipesList recipes={this.props.rcpes} />
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        rcpes: state.recipes,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSearchRecipe: (ingrName) => dispatch({ type: actionTypes.SEARCH_RECIPE , payload: ingrName}),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
