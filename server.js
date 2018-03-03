@@ -2,48 +2,34 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const morgan = require('morgan');
 const passport = require('passport');
+const cors = require('cors');
+
+const config = require('./config/config');
 const routes = require("./routes");
-const session = require('express-session');
-const config = require('./config/database');
-// Setting up a port
-const PORT = process.env.PORT || 3001;
 
 // Init Express Web Server
 const app = express();
+
+// DB Setup
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database);
 
 // Static Folder
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Express Session Middleware (allows testing in development but secured cookies in production)
-const sess = {
-  secret: 'cheffWKeyseGura',
-  saveUninitialized: false,
-  resave: false,
-  cookie: {}
-}
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
-  sess.cookie.secure = true; // serve secure cookies
-}
-app.use(session(sess));
+// Middleware: Morgan (for debugging http requests)
+app.use(morgan('combined'));
 
-// BodyParser Middleware
+// Allow CORS
+app.use(cors());
+
+// Middleware: BodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Passport config
-require('./config/passport')(passport);
-// Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Set up promises with mongoose
-mongoose.Promise = global.Promise;
-// Connect to the Mongo DB
-mongoose.connect(config.database);
 
 // Handle routes
 app.use('/', routes);
@@ -53,7 +39,9 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+
+// Setting up a port
+const PORT = process.env.PORT || 3001;
+
 // Starting Web Server
-app.listen(PORT, function() {
-  console.log(`🌎 ==> Server now on port ${PORT}!`);
-});
+app.listen( PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`) );
