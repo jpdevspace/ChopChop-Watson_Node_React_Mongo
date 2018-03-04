@@ -8,7 +8,7 @@ export const authStart = () => {
     }
 }
 
-export const authSucess = (userName, userToken, userId, userRecipes) => {
+export const authSucess = (userName, userToken, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         userName,
@@ -30,11 +30,14 @@ export const authSignUp = (name, email, password) => {
         dispatch(authStart());
         // Send user info to the backend for registration
         const newUser = { name, email, password };
-        console.log(newUser);
         API.userSignup(newUser)
             .then(response => {
                 console.log(response)
-                dispatch(authSucess(response.data))
+                const userName = response.data.userInfo.name;
+                const userToken = response.data.userInfo.token;
+                const userId = response.data.userInfo.userId;
+
+                dispatch(authSucess(userName, userToken, userId));
             })
             .catch(err => {
                 console.log(err);

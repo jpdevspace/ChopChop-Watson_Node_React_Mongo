@@ -4,7 +4,6 @@ const initialState = {
     name: '',
     token: null,
     userId: null,
-    recipes: [],
     error: null,
     loading: false
     
@@ -23,7 +22,6 @@ const authSuccess = (state = initialState, action) => {
         token: action.userToken,
         userId: action.userId,
         name: action.userName,
-        recipes: action.userRecipes,
         loading: false
     }
 }
