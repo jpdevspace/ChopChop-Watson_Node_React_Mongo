@@ -1,4 +1,4 @@
-import API from '../utils/API';
+import API from '../../utils/API';
 
 import * as actionTypes from './actions';
 
@@ -8,10 +8,12 @@ export const authStart = () => {
     }
 }
 
-export const authSucess = authData => {
+export const authSucess = (userName, userToken, userId, userRecipes) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        userName,
+        userToken,
+        userId
     }
 }
 
@@ -48,7 +50,11 @@ export const authSignIn = (email, password) => {
         API.userLogin(logUser)
             .then(response => {
                 console.log(response)
-                dispatch(authSucess(response.data))
+                const userName = response.data.userInfo.name;
+                const userToken = response.data.userInfo.token;
+                const userId = response.data.userInfo.userId;
+
+                dispatch(authSucess(userName, userToken, userId));
             })
             .catch(err => {
                 console.log(err);

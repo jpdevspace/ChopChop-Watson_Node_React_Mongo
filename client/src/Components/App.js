@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
-import * as actionTypes from '../store/actions';
+import * as actionTypes from '../store/actions/actions';
 
 // Components
 import Layout from './Layout';
@@ -78,7 +78,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        rcpes: state.recipes,
+        rcpes: state.searchReducer.recipes,
     }
 }
 

@@ -20,7 +20,7 @@ class SearchMain extends Component {
 
 const mapStateToProps = state => {
     return {
-        rcpes: state.recipes,
+        rcpes: state.searchReducer.recipes,
     }
 }
 

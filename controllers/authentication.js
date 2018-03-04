@@ -11,8 +11,14 @@ const tokenForUser = user => {
 
 exports.signin = (req, res, next) => {
     // User has already had their email and password authenticated
-    // We just need to give them a token
-    res.send({ token: tokenForUser(req.user) })
+    // We just need to give them a token and the info we need in the front end
+    const userInfo = { 
+        name:   req.user.name,
+        userId: req.user._id,
+        token:  tokenForUser(req.user),
+        recipes: req.user.recipes
+    }
+    res.send({ userInfo });
 }
 
 exports.signup = (req, res, next) => {
@@ -33,18 +39,24 @@ exports.signup = (req, res, next) => {
         if (existingUser) {
             return res.status(422).send({ error: 'Email is in use' });
         }
-        // If a user with email does NOT exists, create it AND save user record
-        const user = new User({
+
+        const newUser = ({
             email: email,
             password: password,
             name: name
         });
 
-        user.save((err) => {
+        User.create(newUser, (err, user) => {
             if (err) { return next(err) }
-            
-            // Respond to request indicating the user was created
-            res.json({ token: tokenForUser(user) });
+            if (user) {
+                // Respond to request indicating the user was created
+                const userInfo = { 
+                    name:   user.name,
+                    userId: user._id,
+                    token:  tokenForUser(user)
+                }
+                res.send({ userInfo });  
+            }
         })
     }); 
 }
