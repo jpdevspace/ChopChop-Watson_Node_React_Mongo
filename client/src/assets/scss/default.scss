@@ -1,0 +1,16 @@
+@import "_config.scss";
+
+.spooner {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+
+    .loading {
+        display: inline-block;
+        animation: spin 2s linear infinite;
+        @include spin;
+    }
+}
+
+
+

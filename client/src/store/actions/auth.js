@@ -19,8 +19,9 @@ export const authSucess = (userName, userToken, userId) => {
 
 export const authFail = error => {
     return{
-        types: actionTypes.AUTH_FAIL,
-        error: error
+        type: actionTypes.AUTH_FAIL,
+        errorMsg: error.response.data,
+        errorStatus: error.response.status
     }
 }
 
@@ -63,6 +64,12 @@ export const authSignIn = (email, password) => {
                 console.log(err);
                 dispatch(authFail(err))
             })
+    }
+}
+
+export const authLogout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
     }
 }
             

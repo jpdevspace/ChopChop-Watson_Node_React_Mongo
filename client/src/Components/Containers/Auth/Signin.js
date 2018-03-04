@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../../store/actions/index';
 
+// Components
+import Spooner from '../../Search/Spooner';
+import Error from '../../Search/Error';
+
 class Signin extends Component {
 
     state = {
@@ -26,31 +30,47 @@ class Signin extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Login</h2>
-                <form onSubmit={this.submitHandler}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="email" 
-                            type="email" 
-                            className="form-control" 
-                            placeholder="Email" />
+                {!this.props.isLoading ? 
+                    <div>
+                        <h2 className="text-center">Login</h2>
+                        <form onSubmit={this.submitHandler}>
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input 
+                                    onChange={this.onInputChange} 
+                                    name="email" 
+                                    type="email" 
+                                    className="form-control" 
+                                    placeholder="Email" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input 
+                                    onChange={this.onInputChange} 
+                                    name="password" 
+                                    type="password" 
+                                    className="form-control"  
+                                    placeholder="Password" />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Login</button>
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="password" 
-                            type="password" 
-                            className="form-control"  
-                            placeholder="Password" />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
-                </form>
+                    : <Spooner />
+                     
+                }
+                {this.props.errMsg ? <Error status={this.props.errSts} msg={this.props.errMsg} /> : null}
             </div>
+            
                         
         );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        isLoading: state.authReducer.loading,
+        errMsg: state.authReducer.errorMsg,
+        errSts: state.authReducer.errorStatus
     }
 }
 
@@ -60,4 +80,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
                 
-export default connect(null, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

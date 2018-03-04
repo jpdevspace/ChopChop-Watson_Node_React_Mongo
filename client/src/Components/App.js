@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
+import '../assets/css/default.min.css';
 import * as actionTypes from '../store/actions/actions';
 
 // Components

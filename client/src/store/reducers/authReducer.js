@@ -4,7 +4,8 @@ const initialState = {
     name: '',
     token: null,
     userId: null,
-    error: null,
+    errorMsg: null,
+    errorStatus: null,
     loading: false
     
 }
@@ -29,7 +30,17 @@ const authSuccess = (state = initialState, action) => {
 const authFail = (state, action) => {
     return {
         ...state,
-        error: 'Somethind baaad happened'
+        errorMsg: action.errorMsg,
+        errorStatus: action.errorStatus
+    }
+}
+
+const authLogout = (state, action) => {
+    return {
+        ...state,
+        name: '',
+        token: null,
+        userId: null
     }
 }
 
@@ -40,6 +51,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_START: return authStart(state, action)
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
+        case actionTypes.AUTH_LOGOUT: return authLogout
         default: return state;
     }
 }
