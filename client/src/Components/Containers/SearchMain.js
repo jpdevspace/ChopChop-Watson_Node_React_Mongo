@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Components 
-import SearchBar from './SearchBar';
-import RecipesList from './RecipesList';
+import SearchBar from '../Search/SearchBar';
+import RecipesList from '../Search/RecipesList';
 
 class SearchMain extends Component {
 

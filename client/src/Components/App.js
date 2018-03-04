@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import './App.css';
 import '../assets/css/default.min.css';
-import * as actionTypes from '../store/actions/actions';
+// import * as actionTypes from '../store/actions/actions';
+import * as actions from '../store/actions/index';
 
 // Components
 import Layout from './Layout';
-import SearchMain from './Search/SearchMain';
+import SearchMain from './Containers/SearchMain';
 import Signup from './Containers/Auth/Signup';
 import Signin from './Containers/Auth/Signin';
+import Dashboard from './User/Dashboard';
+import Logout from './Containers/Auth/Logout'
 
 // AXIOS
-import API from '../utils/API';
+// import API from '../utils/API';
 
 class App extends Component {
     // Activate SpeechRecognition on page load to always be listening
@@ -34,7 +37,7 @@ class App extends Component {
             // Check for matches in ingredients to search for the specific recipe
             ingredients.forEach(ingredient => {
                 if (transcript.includes(ingredient)) {
-                    this.handleRecipesSearch(ingredient);
+                    this.props.onSearchRecipe(ingredient);
                 }
             });
             // Check for matches in commands to perform the action
@@ -51,21 +54,14 @@ class App extends Component {
         recognition.start();
     }
 
-    handleRecipesSearch = ingredient => {
-        API.searchRecipes(ingredient)
-            .then(dbResponse => {
-                const recipes = dbResponse.data;
-                this.props.onSearchRecipe(recipes);
-            })
-            .catch(err => console.log(err))
-    }
-
     render() {
         const routes = (
             <Switch>
-                <Route exact path="/" render={() => <SearchMain onSearch={this.handleRecipesSearch} />} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/signin" component={Signin} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/" exact render={() => <SearchMain onSearch={this.props.onSearchRecipe} />} />
             </Switch>
         )
 
@@ -85,8 +81,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSearchRecipe: (ingrName) => dispatch({ type: actionTypes.SEARCH_RECIPE , payload: ingrName}),
+        onSearchRecipe: (ingredient) => dispatch(actions.searchRecipe(ingredient)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -1,4 +1,9 @@
 export {
     authSignUp,
-    authSignIn
+    authSignIn,
+    authLogout
 } from './auth'
+
+export {
+    searchRecipe
+} from './search'

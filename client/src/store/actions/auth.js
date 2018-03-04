@@ -1,6 +1,7 @@
-import API from '../../utils/API';
-
 import * as actionTypes from './actions';
+
+// Axios for HTTP requests
+import API from '../../utils/API';
 
 export const authStart = () => {
     return {
