@@ -5,7 +5,8 @@ const RecipeSchema = new mongoose.Schema({
     keyword: [String],
     ingredients: [String],
     instructions: [String],
-    src: {type: String, trim: true}   
+    src: {type: String, trim: true},
+    completed: { type: Boolean, default: false }   
 });
 
 const Recipes = mongoose.model('Recipes', RecipeSchema);

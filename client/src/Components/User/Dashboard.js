@@ -13,6 +13,7 @@ import API from '../../utils/API';
 class Dashboard extends Component {
     state = {
         name: null,
+        userId: null,
         recipes: null,
     }
 
@@ -21,6 +22,7 @@ class Dashboard extends Component {
             .then(response => {
                 this.setState({
                     name: response.data.name,
+                    userId: response.data._id,
                     recipes: response.data.recipes
                 })
                 console.log(response.data)
@@ -37,7 +39,7 @@ class Dashboard extends Component {
                         <div>
                             <UserHeader name={this.state.name} recipesQ={this.state.recipes.length} />
                             <div className="container">
-                                <UserBody recipes={this.state.recipes} />
+                                <UserBody userId={this.state.userId} recipes={this.state.recipes} />
                             </div>
                         </div>
                 }

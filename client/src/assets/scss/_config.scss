@@ -16,6 +16,7 @@ $titleFont: 'Poiret One', cursive;
 ***********************/ 
 @mixin Wbuttons($color, $colorHover) {
     display: block;
+    width: 180px;
     color: #fff;
     border-radius: 35px;
     border: 0;

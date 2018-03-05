@@ -19,28 +19,16 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    recipes: []
-});
-
-// On save hook, encrypt password
-// Before saving a model run this function
-// WARNING!!! Don't use ES6 () => {} it prevents the binding of this in const user = this;
-userSchema.pre('save', function(next){  
-    // Get access to the user model
-    const user = this;
-
-    // Generate Salt
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) { return next(err) }
-
-        // Hash/Encrypt password using the Salt
-        bcrypt.hash(user.password, salt, null, (err, hash) => {
-            if (err) { return next(err); }
-            // Overwrite plain text password with encrypted password
-            user.password = hash;
-            next();
-        })
-    })
+    recipes: [
+        {
+            title: { type: String, required: true },
+            keyword: [String],
+            ingredients: [String],
+            instructions: [String],
+            src: {type: String, trim: true},
+            completed: { type: Boolean, default: false } 
+        }
+    ]
 });
 
 userSchema.methods.comparePassword = function(candidatePassword, callback) {

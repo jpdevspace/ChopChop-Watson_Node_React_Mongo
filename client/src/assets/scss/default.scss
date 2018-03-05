@@ -75,10 +75,16 @@ nav {
     border: 3px solid #444;
 }
 
-#search-results,
+#search-results {
+    margin-top: 18em;
+}
+
 #dashboard-section {
     margin-top:20em;
+}
 
+#search-results,
+#dashboard-section {
     ul {
         list-style: none;
     }
@@ -241,9 +247,31 @@ nav {
         }
     }
     .remove-btn {
-        @include Wbuttons(#ff0110, #aa020d);
+        @include Wbuttons(#FFF, #ff0110);
+        color: #ff0110;
+        border: 1px solid #ff0110; 
         margin: 0 auto;
+        &:hover {
+            color: #FFF;
+        }
+
     }
+    
+    .complete-btn {
+        @include Wbuttons(#FFF, #0ED015);
+        margin: 1em auto;
+        color: #0ED015;
+        border: 1px solid #0ED015;
+        &:hover {
+            color: #FFF;
+        }
+    }
+
+    button > .fa-check,
+    button > .fa-trash-alt {
+        margin-left: 5px;
+    }
+    
 }
 
 

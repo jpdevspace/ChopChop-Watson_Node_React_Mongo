@@ -12,8 +12,6 @@ const requireSignin = passport.authenticate('local', { session: false });
 const Recipes = require('../models/Recipes');
 const User = require('../models/User');
 
-
-
 // Get a specific recipe from Database
 router.get('/search/:q', (req, res) => {
     Recipes.find({ keyword: req.params.q  })
@@ -32,7 +30,7 @@ router.put('/save', (req, res) => {
     Recipes.findById(req.body.recipeId, (err, recipeDB) => {
         if (err) { console.log(err) }
         User.findByIdAndUpdate(req.body.userId, { $push: { recipes: recipeDB }}, { new: true })
-            .then(updatedUser => res.send('Recipe Save'))
+            .then(updatedUser => res.send('Recipe Saved'))
             .catch(err => console.error(err))
     })
 })
@@ -43,5 +41,38 @@ router.get('/dashboard/:userId', (req, res) => {
         .then(userDB => res.send(userDB))
         .catch(err => console.log(err))
 }) 
+
+// Remove recipes
+router.put('/dashboard/remove', (req, res) => {
+    const userId = req.body.userId;
+    const recipeTitle = req.body.recipeTitle;
+    User.update(
+        { '_id': userId }, 
+        { $pull: { 'recipes': { 'title': recipeTitle } } },
+        { new: true },
+        (err, response) => { 
+            if (err) { console.log(err) }
+            res.send(response)
+        }
+    )
+}) 
+
+// Mark Recipe as completed
+router.put('/dashboard/complete', (req, res) => {
+    const userId = req.body.userId;
+    const recipeTitle = req.body.recipeTitle;
+    User.findById(userId)
+        .then(user => {
+            user.recipes.forEach(recipe => {
+                if (recipe.title == recipeTitle) {
+                    recipe.completed = true; 
+                    res.send(user)
+                    user.save();
+                }
+            })
+        })
+        .catch(err => console.log(err))
+})
+
 
 module.exports = router;

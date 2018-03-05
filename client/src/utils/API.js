@@ -10,5 +10,9 @@ export default {
     // Save recipes
     saveRecipe: query => axios.put('/save', query),
     // Get User's Recipes
-    getUserRecipes: userId => axios.get(`/dashboard/${userId}`)
+    getUserRecipes: userId => axios.get(`/dashboard/${userId}`),
+    // Remove recipes
+    removeRecipe: recipeInfo => axios.put('/dashboard/remove', recipeInfo),
+    // Mark recipe as completed
+    completeRecipe: recipeInfo => axios.put('/dashboard/complete', recipeInfo)
 }

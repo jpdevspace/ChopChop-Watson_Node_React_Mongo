@@ -1,6 +1,7 @@
 const jwt = require('jwt-simple');
 const User = require('../models/User');
 const config = require('../config/config');
+const bcrypt = require('bcrypt-nodejs');
 
 const tokenForUser = user => {
     // sub stands for subject (it's convention)
@@ -39,23 +40,39 @@ exports.signup = (req, res, next) => {
             return res.status(422).send({ error: 'Email is in use' });
         }
 
-        const newUser = ({
-            email: email,
-            password: password,
-            name: name
-        });
 
-        User.create(newUser, (err, user) => {
+
+        // Generate Salt
+        bcrypt.genSalt(10, (err, salt) => {
+            const newUser = ({
+                email: email,
+                password: password,
+                name: name
+            });
+
             if (err) { return next(err) }
-            if (user) {
-                // Respond to request indicating the user was created
-                const userInfo = { 
-                    name:   user.name,
-                    userId: user._id,
-                    token:  tokenForUser(user)
-                }
-                res.send({ userInfo });  
-            }
+
+            // Hash/Encrypt password using the Salt
+            bcrypt.hash(newUser.password, salt, null, (err, hash) => {
+                if (err) { return next(err); }
+                // Overwrite plain text password with encrypted password
+                newUser.password = hash;
+                // next();
+                User.create(newUser, (err, user) => {
+                    if (err) { return next(err) }
+                    if (user) {
+                        // Respond to request indicating the user was created
+                        const userInfo = { 
+                            name:   user.name,
+                            userId: user._id,
+                            token:  tokenForUser(user)
+                        }
+                        res.send({ userInfo });  
+                    }
+                })
+            })
         })
+
+        
     }); 
 }

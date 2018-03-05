@@ -20,15 +20,17 @@ const RecipesList = props => {
     })
 
     return (
-        <section id="search-results" className="container">
-        {props.recipes.length > 0
-            ?
-                <div>
-                    <h2>Search Results</h2>
-                    <ul>{recipe}</ul>
-                </div>
-            :   <h4>Search for one of the ingredients to begin</h4>
-        }
+        <section id="search-results">
+            <div className="container">
+                {props.recipes.length > 0
+                    ?
+                        <div>
+                            <h2>Search Results</h2>
+                            <ul>{recipe}</ul>
+                        </div>
+                    :   <h4>Search for one of the ingredients to begin</h4>
+                }
+            </div>
 
         </section>
     );
