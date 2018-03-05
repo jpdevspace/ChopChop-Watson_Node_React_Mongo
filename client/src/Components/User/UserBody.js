@@ -25,15 +25,18 @@ class UserBody extends Component {
         API.removeRecipe(recipeInfo)
             .then(response => this.updateRecipesCount(recipeTitle))
             .catch(err => console.log(err))
+        // Update parent component, a recipe was removed
+        this.props.onRemovedRecipe();
     }
 
     // Function to update recipe as complete
     completeRecipe = (userId, recipeTitle) => {
         const recipeInfo = { userId, recipeTitle };
         API.completeRecipe(recipeInfo)
-            .then(response => console.log(response))//this.updateRecipesCount(recipeTitle))
+            .then(response => this.setState({ recipes: response.data.recipes }))
             .catch(err => console.log(err))
-         
+        // Update parent component, a recipe was marked completed
+        this.props.onCompleteRecipe();
     }
 
     // Function to update state and re-render component with new recipes list
@@ -42,9 +45,6 @@ class UserBody extends Component {
         const newRecipeList = this.state.recipes.filter(recipe => recipe.title !== recipeTitle );
         this.setState({ recipes: newRecipeList });
     }
-
-    
-
 
     render() {
         let myRecipes = '';
@@ -58,9 +58,11 @@ class UserBody extends Component {
                     background: `url(${recipe.src}) no-repeat center`,
                     backgroundSize: "cover"
                 }
+            
                 return (
                     <li key={recipe._id} recipe_id={recipe._id}>
-                        <div className="recipe-prev-card">
+                        <div className={`recipe-prev-card
+                            ${recipe.completed ? "recipe-completed" : ""} `}>
                             <div className="recipe-prev-img">
                                 <div style={recipeImg}></div>
                             </div>

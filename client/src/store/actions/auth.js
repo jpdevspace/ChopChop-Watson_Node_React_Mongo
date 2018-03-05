@@ -54,7 +54,6 @@ export const authSignIn = (email, password) => {
         const logUser = { email, password };
         API.userLogin(logUser)
             .then(response => {
-                console.log(response)
                 const userName = response.data.userInfo.name;
                 const userToken = response.data.userInfo.token;
                 const userId = response.data.userInfo.userId;

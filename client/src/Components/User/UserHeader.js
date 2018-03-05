@@ -9,7 +9,7 @@ const UserHeader = props => {
             <div className="user-info">
                 <h2>Hi {props.name}!</h2>
                 <h3>Number of recipes: {props.recipesQ}</h3>
-                <h3>Recipes cooked: 2</h3>
+                <h3>Recipes cooked: {props.completedQ}</h3>
             </div>
         </div>
     );

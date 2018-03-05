@@ -81,6 +81,9 @@ nav {
 
 #dashboard-section {
     margin-top:20em;
+    .recipe-completed {
+        border-right: 25px solid $green !important;
+    }
 }
 
 #search-results,
@@ -247,9 +250,9 @@ nav {
         }
     }
     .remove-btn {
-        @include Wbuttons(#FFF, #ff0110);
-        color: #ff0110;
-        border: 1px solid #ff0110; 
+        @include Wbuttons(#FFF, $red);
+        color: $red;
+        border: 1px solid $red; 
         margin: 0 auto;
         &:hover {
             color: #FFF;
@@ -258,10 +261,10 @@ nav {
     }
     
     .complete-btn {
-        @include Wbuttons(#FFF, #0ED015);
+        @include Wbuttons(#FFF, $green);
         margin: 1em auto;
-        color: #0ED015;
-        border: 1px solid #0ED015;
+        color: $green;
+        border: 1px solid $green;
         &:hover {
             color: #FFF;
         }
