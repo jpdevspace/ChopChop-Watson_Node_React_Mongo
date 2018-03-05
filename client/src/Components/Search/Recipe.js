@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Components
 import RecipeInstructions from './RecipeInstructions';
 import Alert from '../Alert';
+import CookCloseBtn from './CookCloseBtn';
 
 // Axios
 import API from '../../utils/API';
@@ -41,10 +42,7 @@ class Recipe extends Component {
                 {this.state.alert ? <Alert msg={this.state.alert} /> : null }
                 <li>
                     <h3>{this.props.title}</h3>
-                    <button onClick={this.activeRecipe} className="btn btn-info">
-                        {!this.state.active ? "Cook Recipe " : "Close Recipe "}
-                        <i className="fas fa-utensil-spoon"></i>
-                    </button>
+                    <CookCloseBtn onOpen={this.activeRecipe} isActive={this.state.active}/>
                     {this.props.isAuthed 
                         ? 
                             <button 
@@ -55,7 +53,6 @@ class Recipe extends Component {
                         :
                             null
                     }
-
                     <br />
                     <img src={this.props.image} alt="recipe" />
 
@@ -63,6 +60,7 @@ class Recipe extends Component {
                     {this.state.active
                         ?
                         <RecipeInstructions
+                            showSaveBtn={true}
                             onClose={this.activeRecipe}
                             ingredients={this.props.ingredients}
                             instructions={this.props.instructions} />

@@ -10,5 +10,5 @@ export default {
     // Save recipes
     saveRecipe: query => axios.put('/save', query),
     // Get User's Recipes
-    getUserRecipes: userId => axios.get(`/recipes/${userId}`)
+    getUserRecipes: userId => axios.get(`/dashboard/${userId}`)
 }

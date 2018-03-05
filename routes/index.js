@@ -31,10 +31,17 @@ router.post('/signin', requireSignin, Authentication.signin);
 router.put('/save', (req, res) => {
     Recipes.findById(req.body.recipeId, (err, recipeDB) => {
         if (err) { console.log(err) }
-        User.findByIdAndUpdate(req.body.userId, { $push: { recipes: (req.params.recipeId) }}, { new: true })
+        User.findByIdAndUpdate(req.body.userId, { $push: { recipes: recipeDB }}, { new: true })
             .then(updatedUser => res.send('Recipe Save'))
             .catch(err => console.error(err))
-        })
     })
+})
+
+// Load user's recipes
+router.get('/dashboard/:userId', (req, res) => {
+    User.findById(req.params.userId)
+        .then(userDB => res.send(userDB))
+        .catch(err => console.log(err))
+}) 
 
 module.exports = router;

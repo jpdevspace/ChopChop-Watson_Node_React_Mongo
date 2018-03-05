@@ -59,9 +59,9 @@ class App extends Component {
             <Switch>
                 <Route path="/signup" component={Signup} />
                 <Route path="/signin" component={Signin} />
-                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/dashboard" render={ () => <Dashboard userId={this.props.userId} /> } />
                 <Route path="/logout" component={Logout} />
-                <Route path="/" exact render={() => <SearchMain onSearch={this.props.onSearchRecipe} />} />
+                <Route path="/" exact render={ () => <SearchMain onSearch={this.props.onSearchRecipe} /> } />
             </Switch>
         )
 
@@ -76,6 +76,7 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         rcpes: state.searchReducer.recipes,
+        userId: state.authReducer.userId 
     }
 }
 

@@ -32,10 +32,14 @@ class RecipeInstructions extends Component {
                         type="button" 
                         className="btn btn-secondary" 
                         data-dismiss="modal">Close</button>
-                    <button 
-                        className="btn btn-info">Save Recipe 
-                        <i className="far fa-bookmark"></i>
-                    </button>
+                    {this.props.showSaveBtn 
+                        ?
+                            <button 
+                            className="btn btn-info">Save Recipe 
+                                <i className="far fa-bookmark"></i>
+                            </button>
+                        : null
+                    }
                 </div>
             </div>
         </div>
