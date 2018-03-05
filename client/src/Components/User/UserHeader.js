@@ -2,7 +2,7 @@ import React from 'react';
 
 const UserHeader = props => {
     return (
-        <div>
+        <div id="dashboard-header">
             <div className="avatar-container">
                 <div className="avatar-img" />
             </div>

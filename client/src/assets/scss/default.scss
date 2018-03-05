@@ -75,7 +75,8 @@ nav {
     border: 3px solid #444;
 }
 
-#search-results {
+#search-results,
+#dashboard-section {
     margin-top:20em;
 
     ul {
@@ -183,7 +184,6 @@ nav {
     height: 100vh;
     .container {
         width: 50%;
-        // margin: 0 3em 0 auto; 
         padding-top: 5em;
         input {
             border-radius: 35px;
@@ -207,6 +207,42 @@ nav {
             margin: 2em auto;
         }
 
+    }
+}
+
+#dashboard-section {
+    margin-top: 0;
+    #dashboard-header {
+        display: flex;
+        background-color: $aqua;
+        color: #fff;
+        padding: 2em;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin-bottom: 1em;
+
+        .avatar-container {
+            background: #fff;
+            border-radius: 50%;
+            padding: 1em;
+        
+            .avatar-img {
+                background: url('../imgs/avatar_cook.png') no-repeat center;
+                background-size: contain;
+                border-radius: 50%;
+                width: 145px;
+                height: 140px;
+            }
+        }
+
+        .user-info {
+            flex-grow: 2;
+            text-align: center;
+        }
+    }
+    .remove-btn {
+        @include Wbuttons(#ff0110, #aa020d);
+        margin: 0 auto;
     }
 }
 

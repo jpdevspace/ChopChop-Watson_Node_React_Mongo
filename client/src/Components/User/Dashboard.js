@@ -30,13 +30,15 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div id="dashboard-section">
                 {!this.state.name 
                     ? <Spooner />
                     :
                         <div>
                             <UserHeader name={this.state.name} recipesQ={this.state.recipes.length} />
-                            <UserBody recipes={this.state.recipes} />
+                            <div className="container">
+                                <UserBody recipes={this.state.recipes} />
+                            </div>
                         </div>
                 }
                 
