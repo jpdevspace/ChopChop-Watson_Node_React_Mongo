@@ -14,9 +14,7 @@ class Recipe extends Component {
         alert: null
     };
 
-    activeRecipe = () => {
-        this.setState({ active: !this.state.active })
-    }
+    activeRecipe = () => this.setState({ active: !this.state.active })
 
     saveRecipe = (userId, recipeId) => {
         const userRecipe = { userId, recipeId }
@@ -36,39 +34,38 @@ class Recipe extends Component {
     render() {
         const userId = this.props.authedUser;
         const recipeId = this.props.recipe_id;
-
+        const recipeImg = {
+            background: `url(${this.props.image}) no-repeat center`,
+            backgroundSize: "cover"
+        }
         return (
             <div>
                 {this.state.alert ? <Alert msg={this.state.alert} /> : null }
                 <li>
-                    <h3>{this.props.title}</h3>
-                    <CookCloseBtn onOpen={this.activeRecipe} isActive={this.state.active}/>
-                    {this.props.isAuthed 
-                        ? 
-                            <button 
-                                onClick={() => this.saveRecipe(userId, recipeId)} 
-                                className="btn btn-success">Save 
-                                <i className="far fa-bookmark"></i>
-                            </button>
-                        :
-                            null
-                    }
-                    <br />
-                    <img src={this.props.image} alt="recipe" />
+                    <div className="recipe-prev-card">
+                        <div className="recipe-prev-img">
+                            <div style={recipeImg}></div>
+                        </div>
+                        <div className="recipe-prev-text">
+                            <h5>{this.props.title}</h5>
+                            <CookCloseBtn onOpen={this.activeRecipe} isActive={this.state.active}/>
+                            {!this.props.isAuthed ? null 
+                                : 
+                                    <button 
+                                        onClick={() => this.saveRecipe(userId, recipeId)} 
+                                        className="save-btn">Save <i className="far fa-bookmark"></i>
+                                    </button>
+                            }
+                        </div>
+                        {!this.state.active ? null
+                            :
+                                <RecipeInstructions
+                                    onClose={this.activeRecipe}
+                                    ingredients={this.props.ingredients}
+                                    instructions={this.props.instructions} />
 
-                    <br />
-                    {this.state.active
-                        ?
-                        <RecipeInstructions
-                            showSaveBtn={true}
-                            onClose={this.activeRecipe}
-                            ingredients={this.props.ingredients}
-                            instructions={this.props.instructions} />
-                        :
-                        null
-                    }
-
-                    <hr />
+                        }
+                    </div>
                 </li>
             </div>
         );

@@ -26,38 +26,37 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
-                <h2 className="text-center">Sign up</h2>
-                <form onSubmit={this.submitHandler}>
-                    <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="name" 
-                            type="text" 
-                            className="form-control" 
-                            placeholder="Name" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="email" 
-                            type="email" 
-                            className="form-control" 
-                            placeholder="Email" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            onChange={this.onInputChange} 
-                            name="password" 
-                            type="password" 
-                            className="form-control"  
-                            placeholder="Password" />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Sign up</button>
-                </form>
+            <div id="signup-section">
+                <div className="container">
+                    <h1 className="text-center">Sign up</h1>
+                    <form onSubmit={this.submitHandler}>
+                        <div className="form-group">
+                            <input 
+                                onChange={this.onInputChange} 
+                                name="name" 
+                                type="text" 
+                                className="form-control" 
+                                placeholder="Name" />
+                        </div>
+                        <div className="form-group">
+                            <input 
+                                onChange={this.onInputChange} 
+                                name="email" 
+                                type="email" 
+                                className="form-control" 
+                                placeholder="Email" />
+                        </div>
+                        <div className="form-group">
+                            <input 
+                                onChange={this.onInputChange} 
+                                name="password" 
+                                type="password" 
+                                className="form-control"  
+                                placeholder="Password" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Sign up</button>
+                    </form>
+                </div>
             </div>
                         
         );

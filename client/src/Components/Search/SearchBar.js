@@ -12,7 +12,7 @@ class SearchBar extends Component {
                     className="form-control"
                     placeholder="Search for chicken, pasta, beef or fish recipes"
                 />
-                <button
+                <button id="search-btn"
                     onClick={() => this.props.onSearch(this.state.ingredient)}
                     type="submit"
                     className="">

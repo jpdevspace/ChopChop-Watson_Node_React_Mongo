@@ -2,10 +2,32 @@
     Variables
 ***********************/
 $aqua: #44bba4;
+$aquaHover: #0c8f77;
 $purple: #8d3b72;
+$purpleHover: #610f45;
 $pink: #eabcad;
+$pinkHover: #c4755b;
 $handWrittenFont: 'Pacifico', cursive;
 $titleFont: 'Poiret One', cursive;
+
+
+/***********************
+    Mixin
+***********************/ 
+@mixin Wbuttons($color, $colorHover) {
+    display: block;
+    color: #fff;
+    border-radius: 35px;
+    border: 0;
+    padding: 10px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 6px 6px 4px rgba(50, 50, 50, 0.6);
+    background-color: $color;
+    &:hover {
+        background-color: $colorHover;
+    }
+}
 
 
 /***********************
@@ -17,3 +39,5 @@ $titleFont: 'Poiret One', cursive;
         100% { transform: rotate(360deg); }
     }  
 } 
+
+

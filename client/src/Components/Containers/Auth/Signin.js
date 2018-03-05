@@ -29,13 +29,12 @@ class Signin extends Component {
 
     render() {
         return (
-            <div>
+            <div id="login-section">
                 {!this.props.isLoading ? 
-                    <div>
-                        <h2 className="text-center">Login</h2>
+                    <div className="container">
+                        <h1 className="text-center">Login</h1>
                         <form onSubmit={this.submitHandler}>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
                                 <input 
                                     onChange={this.onInputChange} 
                                     name="email" 
@@ -44,7 +43,6 @@ class Signin extends Component {
                                     placeholder="Email" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">Password</label>
                                 <input 
                                     onChange={this.onInputChange} 
                                     name="password" 

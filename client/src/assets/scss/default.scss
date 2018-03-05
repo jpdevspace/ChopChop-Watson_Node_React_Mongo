@@ -46,25 +46,12 @@ nav {
         color: #666;
     }
 
-    button {
-        display: block;
-        background-color: $aqua;
-        color: #fff;
-        border-radius: 35px;
-        border: 0;
-        padding: 10px 25px;
-        font-size: 18px;
-        margin: 2em auto;
-        cursor: pointer;
-        box-shadow: 6px 6px 4px rgba(50, 50, 50, 0.7);
-    
-        &:hover {
-            background-color: #3fad98;
-            
-        }
+    #search-btn {
+        @include Wbuttons($aqua, $aquaHover);
+        margin: 2em auto;        
     }
-
 }
+
 .spooner {
     display: block;
     text-align: center;
@@ -90,6 +77,137 @@ nav {
 
 #search-results {
     margin-top:20em;
+
+    ul {
+        list-style: none;
+    }
+
+    .recipe-prev-card {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        box-shadow: 4px 4px 15px rgba(50, 50, 50, 0.3);
+        min-height: 234px;
+        margin-bottom: 2em;
+    }
+
+    .recipe-prev-img {
+        width: 50%;
+        max-height: 100%;
+
+        div {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .recipe-prev-text {
+        text-align: center;
+        margin: 1.5em auto;
+        max-width: 50%;
+        padding: 0.7em;
+        
+        .cook-btn {
+            @include Wbuttons($aqua, $aquaHover);
+            margin: 1em auto;
+        }
+
+        .save-btn {
+            @include Wbuttons($pink, $pinkHover);
+            margin: 1em auto;
+            
+            .fa-bookmark {
+                margin-left: 6px;
+            }
+        }
+    }
+
+    .recipe-details {
+        .modal-content {
+            border: 0;
+            border-radius: 0;
+            background-color: $aqua;
+            
+            .modal-title {
+                color: #FFF;
+            }
+        }
+
+        button {
+            @include Wbuttons(#FFF, #FFF);
+            box-shadow: 0 0 0;
+            color: $aqua;
+            width: 6em;
+            margin: 0 1em 1em auto;
+            &:hover {
+                color: $aquaHover;
+            }
+        }
+    }
+}
+
+#signup-section {
+    background: url('../imgs/register_bg.jpg') no-repeat center;
+    background-size: cover;
+    height: 100vh;
+    .container {
+        width: 50%;
+        margin: 0 3em 0 auto; 
+        padding-top: 5em;
+        h1 {
+            font-family: $handWrittenFont;
+            color: #FFF;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 1px #444;
+        }
+        input {
+            border-radius: 35px;
+            border: 0;
+            box-shadow: 4px 4px 2px rgba(50, 50, 50, 0.7);
+            font-family: $handWrittenFont;
+            font-size: 1.4em;
+            color: #666;
+            margin-top: 1.5em;
+        }
+        button {
+            @include Wbuttons(#aa020d, #ff0110);
+            margin: 2em auto;
+        }
+    }
+}
+
+#login-section {
+    background: url('../imgs/login_bg.jpg') no-repeat center;
+    background-size: cover;
+    height: 100vh;
+    .container {
+        width: 50%;
+        // margin: 0 3em 0 auto; 
+        padding-top: 5em;
+        input {
+            border-radius: 35px;
+            border: 0;
+            box-shadow: 4px 4px 2px rgba(50, 50, 50, 0.7);
+            font-family: $handWrittenFont;
+            font-size: 1.4em;
+            color: #666;
+            margin-top: 1.5em;
+        }
+
+        h1 {
+            font-family: $handWrittenFont;
+            color: $aqua;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 1px #444;
+        }
+        button {
+            @include Wbuttons($aqua, $aquaHover);
+            margin: 2em auto;
+        }
+
+    }
 }
 
 
