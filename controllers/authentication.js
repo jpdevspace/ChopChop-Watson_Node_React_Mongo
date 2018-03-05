@@ -15,8 +15,7 @@ exports.signin = (req, res, next) => {
     const userInfo = { 
         name:   req.user.name,
         userId: req.user._id,
-        token:  tokenForUser(req.user),
-        recipes: req.user.recipes
+        token:  tokenForUser(req.user)
     }
     res.send({ userInfo });
 }

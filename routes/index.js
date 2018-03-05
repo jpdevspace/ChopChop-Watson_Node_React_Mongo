@@ -27,28 +27,14 @@ router.post('/signup', Authentication.signup);
 // Signin Users
 router.post('/signin', requireSignin, Authentication.signin);
 
-
-
-
-
-
-
-
-// // Handle saving recipes
-// router.put('/save/:userId/:recipeId', (req, res) => {
-//     User.findByIdAndUpdate(req.params.userId, {
-//         $push: { recipes: (req.params.recipeId) }
-//     }, { new: true })
-//         .then(updatedUser => res.send('Recipe Save'))
-//         .catch(err => console.error(err))
-// });
-
-// // Display all recipes from a specific user
-// router.get('/recipes/:userId', (req, res) => {
-//     User.findById(req.params.userId)
-//         .populate("recipes")
-//         .then(userRecipes => res.json(userRecipes))
-//         .catch(err => console.error(err))
-// })
+// Recipes saved by user
+router.put('/save', (req, res) => {
+    Recipes.findById(req.body.recipeId, (err, recipeDB) => {
+        if (err) { console.log(err) }
+        User.findByIdAndUpdate(req.body.userId, { $push: { recipes: (req.params.recipeId) }}, { new: true })
+            .then(updatedUser => res.send('Recipe Save'))
+            .catch(err => console.error(err))
+        })
+    })
 
 module.exports = router;

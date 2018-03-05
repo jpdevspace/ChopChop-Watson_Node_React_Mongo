@@ -12,7 +12,10 @@ class SearchMain extends Component {
             <div>
                 <h1>Cheff W</h1>
                 <SearchBar onSearch={this.props.onSearch} />
-                <RecipesList recipes={this.props.rcpes} />
+                <RecipesList 
+                    isAuthed={this.props.isAuthed} 
+                    authedUser={this.props.authedUser}
+                    recipes={this.props.rcpes} />
             </div>
         );
     }
@@ -21,6 +24,9 @@ class SearchMain extends Component {
 const mapStateToProps = state => {
     return {
         rcpes: state.searchReducer.recipes,
+        // Boolean to check if user is authenticated or not
+        isAuthed: state.authReducer.token !== null,
+        authedUser: state.authReducer.userId
     }
 }
 

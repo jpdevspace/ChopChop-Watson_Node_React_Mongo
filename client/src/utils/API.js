@@ -8,7 +8,7 @@ export default {
     // User login
     userLogin:  query => axios.post('/signin', query),
     // Save recipes
-    saveRecipe: (userId, recipeId) => axios.put(`/${userId}/save/${recipeId}`),
+    saveRecipe: query => axios.put('/save', query),
     // Get User's Recipes
     getUserRecipes: userId => axios.get(`/recipes/${userId}`)
 }
