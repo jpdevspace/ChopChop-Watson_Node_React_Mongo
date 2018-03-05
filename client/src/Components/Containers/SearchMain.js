@@ -9,7 +9,7 @@ class SearchMain extends Component {
 
     render() {
         return(
-            <div>
+            <div id="main-search">
                 <h1>Cheff W</h1>
                 <SearchBar onSearch={this.props.onSearch} />
                 <RecipesList 

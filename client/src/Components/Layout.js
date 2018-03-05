@@ -9,7 +9,7 @@ class Layout extends Component{
         return(
             <div>
                 <Nav isAuth={this.props.isAuthed} />
-                <div className="container">
+                <div>
                     {this.props.children}
                 </div>
             </div>

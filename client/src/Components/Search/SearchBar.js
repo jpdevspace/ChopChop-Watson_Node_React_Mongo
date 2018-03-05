@@ -15,7 +15,7 @@ class SearchBar extends Component {
                 <button
                     onClick={() => this.props.onSearch(this.state.ingredient)}
                     type="submit"
-                    className="btn btn-primary mt-3">
+                    className="">
                     Search
                 </button>
             </div>
