@@ -22,7 +22,7 @@ nav {
 
 #main-search {
     padding-top: 10em;
-    background: url('../imgs/wooden_board.jpg') no-repeat center;
+    background: url('../imgs/wooden_board3.png') no-repeat center;
     background-size: cover;
     height: 80vh;
 
@@ -66,9 +66,12 @@ nav {
     }
 }
 
-#custom-alert {
+.custom-alert {
     position: fixed;
     top: 5px;
+    width: 100%;
+}
+.custom-alert[data-main="mainPage"] {
     width: 70%;
 }
 
@@ -154,7 +157,7 @@ nav {
 }
 
 #signup-section {
-    background: url('../imgs/register_bg.jpg') no-repeat center;
+    background: url('../imgs/register_bg2.png') no-repeat center;
     background-size: cover;
     height: 100vh;
     .container {
@@ -185,7 +188,7 @@ nav {
 }
 
 #login-section {
-    background: url('../imgs/login_bg.jpg') no-repeat center;
+    background: url('../imgs/login_bg2.png') no-repeat center;
     background-size: cover;
     height: 100vh;
     .container {

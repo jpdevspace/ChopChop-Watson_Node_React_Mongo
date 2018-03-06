@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Components
 import UserBody from './UserBody';
 import UserHeader from './UserHeader';
+import Alert from '../Alert';
 
 // Component
 import Spooner from '../Search/Spooner';
@@ -16,41 +17,74 @@ class Dashboard extends Component {
         userId: null,
         recipes: null,
         completedQ: 0,
-        recipesQ: 0
+        recipesQ: 0,
+        alert: null
     }
 
     componentDidMount () {
+        // When the component mounts, get all this user's specific recipes
         API.getUserRecipes(this.props.userId)
             .then(response => {
+                // Count how many are marked as completed 
+                const completedCount = response.data.recipes.filter(recipe => recipe.completed )
                 this.setState({
                     name: response.data.name,
                     userId: response.data._id,
                     recipes: response.data.recipes,
-                    recipesQ: response.data.recipes.length
+                    recipesQ: response.data.recipes.length,
+                    completedQ: completedCount.length,
+                    alert: `Welcome back ${response.data.name}!`
                 })
-                this.countCompletedRecipes(response.data.recipes)
+                this.clearAlert();
             })
             .catch(err => console.log(err))
     }
 
-    countCompletedRecipes = recipes => {
-        const completedCount = recipes.filter(recipe => recipe.completed )
-        this.setState({ completedQ: completedCount.length })
+    // Function to handle recipes markes as completed
+    handleRecipeCmpl = (recipeTitle) => {
+        const userId = this.state.userId
+        const recipeInfo = { userId, recipeTitle };
+        // Generate request to backend
+        API.completeRecipe(recipeInfo)
+            // Update recipes completed count and list of recipes state with the response from MongoDB
+            .then(response => { 
+                this.setState({ 
+                    recipes: response.data.recipes, 
+                    completedQ: this.state.completedQ + 1,
+                    alert: 'Recipe completed. Congratulations!'
+                })
+                this.clearAlert();
+
+            })
+            .catch(err => console.log(err))
     }
 
-    updateCompletedCount = () => {
-        console.log("running like the wind")
-        this.setState({ completedQ: this.state.completedQ + 1 })
+    // Function to handle recipes removals from user dashboard
+    handleRecipeRmv = (recipeTitle) => {
+        const userId = this.state.userId
+        const recipeInfo = { userId, recipeTitle };
+        // Generate request to backend
+        API.removeRecipe(recipeInfo)
+            .then(response => {
+                // Update my state to filter out the removed recipe using the recipeTitle
+                const newRecipeList = this.state.recipes.filter(recipe => recipe.title !== recipeTitle );
+                this.setState({ 
+                    recipes: newRecipeList,
+                    recipesQ: this.state.recipesQ - 1, 
+                    alert: 'Recipe removed'
+                });
+                this.clearAlert();
+            })
+            .catch(err => console.log(err))
     }
 
-    updateRemovedRecipe = () => {
-        console.log('another one bites the dust')
-        this.setState({ recipesQ: this.state.recipesQ - 1 })
-    }
+    // Clear alert after 3 secs
+    clearAlert = () => setTimeout(() => this.setState({alert: null}), 3000)
 
     render() {
         return (
             <div id="dashboard-section">
+                {this.state.alert ? <Alert mainPage={false} msg={this.state.alert} /> : null }
                 {!this.state.name 
                     ? <Spooner />
                     :
@@ -62,10 +96,10 @@ class Dashboard extends Component {
                             />
                             <div className="container">
                                 <UserBody 
-                                    userId={this.state.userId} 
                                     recipes={this.state.recipes} 
-                                    onCompleteRecipe={this.updateCompletedCount} 
-                                    onRemovedRecipe={this.updateRemovedRecipe}
+                                    onCompleteRecipe={this.updateCompletedCount}
+                                    onRecipeRmv={this.handleRecipeRmv}
+                                    onRecipeCmpl={this.handleRecipeCmpl}
                                 />
                             </div>
                         </div>

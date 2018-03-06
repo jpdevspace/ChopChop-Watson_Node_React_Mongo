@@ -22,18 +22,14 @@ class Recipe extends Component {
         API.saveRecipe(userRecipe)
             .then(response => {
                 this.setState({ alert: 'Recipe Saved!' })
-                console.log(response)
                 this.clearAlert();
+                console.log(response)
             })
             .catch(err => console.log(err))
     }
 
-    // Remove alert after 3 seconds
-    clearAlert = () => {
-        setTimeout(() => {
-            this.setState({alert: null})
-        }, 3000)
-    }
+    // Clear alert after 3 secs
+    clearAlert = () => setTimeout(() => this.setState({alert: null}), 3000)
 
     render() {
         
@@ -46,7 +42,8 @@ class Recipe extends Component {
         }
         return (
             <div>
-                {this.state.alert ? <Alert msg={this.state.alert} /> : null }
+                {this.state.alert ? <Alert mainPage={true} msg={this.state.alert} /> : null }
+                
                 <li>
                     <div className="recipe-prev-card">
                         <div className="recipe-prev-img">
