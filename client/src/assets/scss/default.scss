@@ -55,9 +55,11 @@ nav {
 .spooner {
     display: block;
     text-align: center;
-    margin: 0 auto;
+    margin: 2em auto;
+    color: $pink;
 
     .loading {
+        margin: 1em;
         display: inline-block;
         animation: spin 2s linear infinite;
         @include spin;
@@ -65,14 +67,9 @@ nav {
 }
 
 #custom-alert {
-    position: absolute;
-    background-color: #dedede;
-    top: 60px;
-    padding-top: 15px;
-    width: 40em;
-    text-align: center;
-    border-radius: 5px 5px 35px 35px;
-    border: 3px solid #444;
+    position: fixed;
+    top: 5px;
+    width: 70%;
 }
 
 #search-results {

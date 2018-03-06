@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../../store/actions/index';
 
-class Signup extends Component {
+//Components
+import Spooner from '../../Search/Spooner';
 
+class Signup extends Component {
     state = {
         name: '',
         email: '',
@@ -25,9 +28,18 @@ class Signup extends Component {
     }
 
     render() {
+        // Check if user is authenticated after registration and redirect user
+        let authRedirect = null;
+        if (this.props.isAuthed) {
+            authRedirect = <Redirect to="/dashboard" />
+        }
+
         return (
             <div id="signup-section">
+                {this.props.isLoading ? <Spooner />
+                :
                 <div className="container">
+                    {authRedirect}
                     <h1 className="text-center">Sign up</h1>
                     <form onSubmit={this.submitHandler}>
                         <div className="form-group">
@@ -57,9 +69,17 @@ class Signup extends Component {
                         <button type="submit" className="btn btn-primary">Sign up</button>
                     </form>
                 </div>
+                }
             </div>
                         
         );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        isLoading: state.authReducer.loading,
+        isAuthed: state.authReducer.token !== null
     }
 }
 
@@ -69,4 +89,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
                 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -4,7 +4,6 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import './App.css';
 import '../assets/css/default.min.css';
-// import * as actionTypes from '../store/actions/actions';
 import * as actions from '../store/actions/index';
 
 // Components
@@ -21,6 +20,12 @@ import Logout from './Containers/Auth/Logout'
 class App extends Component {
     // Activate SpeechRecognition on page load to always be listening
     componentDidMount() {
+        // Check if there's an existing token with authentication info to 
+        // automatically authenticate user
+        this.props.onTryAutoSignup();
+        
+        // Web Speech API 
+        // Keep mic open listening for ingredients or commands
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         const recognition = new window.SpeechRecognition();
@@ -42,10 +47,10 @@ class App extends Component {
             });
             // Check for matches in commands to perform the action
             if (transcript.includes('scroll down')) {
-                window.scrollBy(0, 100);
+                window.scrollBy(0, 200);
             }
             if (transcript.includes('scroll up' || 'scroll app')) {
-                window.scrollBy(0, -100);
+                window.scrollBy(0, -200);
             }
         };
         // Keep the Speech API open
@@ -83,6 +88,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSearchRecipe: (ingredient) => dispatch(actions.searchRecipe(ingredient)),
+        onTryAutoSignup: () => dispatch(actions.authCheckState())
     }
 }
 

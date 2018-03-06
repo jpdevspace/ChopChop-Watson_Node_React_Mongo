@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import RecipeInstructions from '../Search/RecipeInstructions';
 import CookCloseBtn from '../Search/CookCloseBtn';
 import Spooner from '../Search/Spooner';
+import Alert from '../Alert';
 
 // Axios
 import API from '../../utils/API';
@@ -16,9 +17,8 @@ class UserBody extends Component {
         recipes: this.props.recipes
     };
     // Function to open/close cooking instructions
-    activeRecipe = () => {
-        this.setState({ active: !this.state.active })
-    }
+    activeRecipe = () => this.setState({ active: !this.state.active })
+
     // Function to remove recipe from user's profile
     removeRecipe = (userId, recipeTitle) => {
         const recipeInfo = { userId, recipeTitle };
@@ -60,40 +60,40 @@ class UserBody extends Component {
                 }
             
                 return (
-                    <li key={recipe._id} recipe_id={recipe._id}>
-                        <div className={`recipe-prev-card
-                            ${recipe.completed ? "recipe-completed" : ""} `}>
-                            <div className="recipe-prev-img">
-                                <div style={recipeImg}></div>
+                    <div>
+                        {this.state.alert ? <Alert msg={this.state.alert} /> : null }
+                        <li key={recipe._id} recipe_id={recipe._id}>
+                            <div className={`recipe-prev-card
+                                ${recipe.completed ? "recipe-completed" : ""} `}>
+                                <div className="recipe-prev-img">
+                                    <div style={recipeImg}></div>
+                                </div>
+                                <div className="recipe-prev-text">
+                                    <h5>{recipe.title}</h5>
+                                    <CookCloseBtn 
+                                        onOpen={this.activeRecipe} 
+                                        isActive={this.state.active}/>
+                                    <button 
+                                        onClick={() => this.completeRecipe(this.state.userId, recipe.title)}
+                                        className="complete-btn">Complete 
+                                        <i className="fas fa-check"></i>
+                                    </button>
+                                    <button 
+                                        onClick={() => this.removeRecipe(this.state.userId, recipe.title)} 
+                                        className="remove-btn">Remove 
+                                        <i className="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                                {!this.state.active ? null
+                                    :
+                                        <RecipeInstructions
+                                            onClose={this.activeRecipe}
+                                            ingredients={recipe.ingredients}
+                                            instructions={recipe.instructions} />
+                                }
                             </div>
-                            <div className="recipe-prev-text">
-                                <h5>{recipe.title}</h5>
-                                <CookCloseBtn 
-                                    onOpen={this.activeRecipe} 
-                                    isActive={this.state.active}/>
-                                <button 
-                                    onClick={() => this.completeRecipe(this.state.userId, recipe.title)}
-                                    className="complete-btn">Complete 
-                                    <i className="fas fa-check"></i>
-                                </button>
-                                <button 
-                                    onClick={() => this.removeRecipe(this.state.userId, recipe.title)} 
-                                    className="remove-btn">Remove 
-                                    <i className="far fa-trash-alt"></i>
-                                </button>
-                            </div>
-                            {this.state.active
-                                ?
-                                <RecipeInstructions
-                                    showSaveBtn={false}
-                                    onClose={this.activeRecipe}
-                                    ingredients={recipe.ingredients}
-                                    instructions={recipe.instructions} />
-                                :
-                                null
-                            }
-                        </div>
-                    </li>
+                        </li>
+                    </div>
                 )
             })
         }

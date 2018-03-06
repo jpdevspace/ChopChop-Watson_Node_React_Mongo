@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../../store/actions/index';
 
@@ -28,10 +29,18 @@ class Signin extends Component {
     }
 
     render() {
+        // Check if user is already authenticated
+        let authRedirect = null;
+        if (this.props.isAuthed) {
+            authRedirect = <Redirect to="/dashboard" />
+        }
+
         return (
             <div id="login-section">
                 {!this.props.isLoading ? 
+                    
                     <div className="container">
+                        {authRedirect}
                         <h1 className="text-center">Login</h1>
                         <form onSubmit={this.submitHandler}>
                             <div className="form-group">
@@ -68,7 +77,8 @@ const mapStateToProps = state => {
     return {
         isLoading: state.authReducer.loading,
         errMsg: state.authReducer.errorMsg,
-        errSts: state.authReducer.errorStatus
+        errSts: state.authReducer.errorStatus,
+        isAuthed: state.authReducer.token !== null
     }
 }
 

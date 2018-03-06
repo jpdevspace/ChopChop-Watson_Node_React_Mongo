@@ -13,9 +13,10 @@ class Recipe extends Component {
         active: false,
         alert: null
     };
-
+    // Function to open/close cooking instructions
     activeRecipe = () => this.setState({ active: !this.state.active })
 
+    // Function to save a recipe in the user's profile
     saveRecipe = (userId, recipeId) => {
         const userRecipe = { userId, recipeId }
         API.saveRecipe(userRecipe)
@@ -27,13 +28,18 @@ class Recipe extends Component {
             .catch(err => console.log(err))
     }
 
-    // clearAlert = () => {
-    //     setTimeout(this.setState({alert: null}), 3000)
-    // }
+    // Remove alert after 3 seconds
+    clearAlert = () => {
+        setTimeout(() => {
+            this.setState({alert: null})
+        }, 3000)
+    }
 
     render() {
+        
         const userId = this.props.authedUser;
         const recipeId = this.props.recipe_id;
+        // Variable to hold each recipes background image and CSS styling
         const recipeImg = {
             background: `url(${this.props.image}) no-repeat center`,
             backgroundSize: "cover"
