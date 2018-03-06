@@ -38,6 +38,7 @@ class App extends Component {
                 .join('')
             // Check for keywords
             const ingredients = ['chicken', 'beef', 'pasta', 'fish'];
+            const voiceIndex = ['1', '2', '3', '4', '5'];
 
             // Check for matches in ingredients to search for the specific recipe
             ingredients.forEach(ingredient => {
@@ -45,13 +46,21 @@ class App extends Component {
                     this.props.onSearchRecipe(ingredient);
                 }
             });
+
+            // Check for matches in ingredients
+            voiceIndex.forEach(voiceIndex => {
+                if (transcript.includes(voiceIndex)) {
+                    this.props.onVoiceSetIndex(voiceIndex)
+                }
+            })
+
             // Check for matches in commands to perform the action
             if (transcript.includes('scroll down')) {
-                window.scrollBy(0, 200);
+                window.scrollBy(0, 300);
             }
             if (transcript.includes('scroll up' || 'scroll app')) {
-                window.scrollBy(0, -200);
-            }
+                window.scrollBy(0, -300);
+            }        
         };
         // Keep the Speech API open
         recognition.addEventListener('end', recognition.start);
@@ -87,8 +96,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSearchRecipe: (ingredient) => dispatch(actions.searchRecipe(ingredient)),
-        onTryAutoSignup: () => dispatch(actions.authCheckState())
+        onSearchRecipe: ingredient => dispatch(actions.searchRecipe(ingredient)),
+        onTryAutoSignup: () => dispatch(actions.authCheckState()),
+        onVoiceSetIndex: voiceIndex => dispatch(actions.selectRecipe(voiceIndex))
     }
 }
 

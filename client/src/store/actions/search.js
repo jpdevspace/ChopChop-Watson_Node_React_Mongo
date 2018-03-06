@@ -10,6 +10,13 @@ export const searchSuccess = recipes => {
     }
 }
 
+export const selectingRec = recipeIndex => {
+    return {
+        type: actionTypes.SELECT_RECIPE,
+        recipeIndex
+    }
+}
+
 export const searchRecipe = ingredient => {
     return dispatch => {
         API.searchRecipes(ingredient)
@@ -20,3 +27,8 @@ export const searchRecipe = ingredient => {
             .catch(err => console.log(err))
     }
 }
+
+export const selectRecipe = recipeIndex => {
+    return dispatch => dispatch(selectingRec(recipeIndex))
+}
+

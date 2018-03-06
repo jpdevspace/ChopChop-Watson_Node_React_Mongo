@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 // Components
 import UserBody from './UserBody';
@@ -82,13 +83,20 @@ class Dashboard extends Component {
     clearAlert = () => setTimeout(() => this.setState({alert: null}), 3000)
 
     render() {
+        // Check if user is already authenticated
+        let authRedirect = null;
+        if (this.props.userId === null) {
+            authRedirect = <Redirect to="/signin" />
+        }
+
         return (
             <div id="dashboard-section">
                 {this.state.alert ? <Alert mainPage={false} msg={this.state.alert} /> : null }
                 {!this.state.name 
-                    ? <Spooner />
+                    ? <span>{authRedirect}<Spooner /></span>
                     :
                         <div>
+                            
                             <UserHeader 
                                 name={this.state.name} 
                                 completedQ={this.state.completedQ } 
@@ -104,7 +112,6 @@ class Dashboard extends Component {
                             </div>
                         </div>
                 }
-                
             </div>
         );
     }

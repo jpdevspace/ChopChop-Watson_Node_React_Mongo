@@ -6,5 +6,6 @@ export {
 } from './auth'
 
 export {
-    searchRecipe
+    searchRecipe,
+    selectRecipe
 } from './search'

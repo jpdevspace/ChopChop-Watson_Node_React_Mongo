@@ -38,7 +38,6 @@ class Signin extends Component {
         return (
             <div id="login-section">
                 {!this.props.isLoading ? 
-                    
                     <div className="container">
                         {authRedirect}
                         <h1 className="text-center">Login</h1>
@@ -67,8 +66,6 @@ class Signin extends Component {
                 }
                 {this.props.errMsg ? <Error status={this.props.errSts} msg={this.props.errMsg} /> : null}
             </div>
-            
-                        
         );
     }
 }

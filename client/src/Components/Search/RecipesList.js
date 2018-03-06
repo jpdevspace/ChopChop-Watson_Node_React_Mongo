@@ -7,6 +7,7 @@ const RecipesList = props => {
     let recipe = props.recipes.map((value, index) => {
         return (
             <Recipe
+                voiceIndex={index + 1}
                 isAuthed={props.isAuthed}
                 authedUser={props.authedUser}
                 key={value._id}

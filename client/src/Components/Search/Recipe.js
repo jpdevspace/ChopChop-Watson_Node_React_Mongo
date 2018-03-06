@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Components
 import RecipeInstructions from './RecipeInstructions';
 import Alert from '../Alert';
 import CookCloseBtn from './CookCloseBtn';
+
+import * as actions from '../../store/actions/index';
 
 // Axios
 import API from '../../utils/API';
@@ -14,7 +17,12 @@ class Recipe extends Component {
         alert: null
     };
     // Function to open/close cooking instructions
-    activeRecipe = () => this.setState({ active: !this.state.active })
+    
+
+    activeRecipe = () => {
+        this.setState({ active: !this.state.active })
+        this.props.onVoiceSetIndex(null)
+    }
 
     // Function to save a recipe in the user's profile
     saveRecipe = (userId, recipeId) => {
@@ -23,7 +31,6 @@ class Recipe extends Component {
             .then(response => {
                 this.setState({ alert: 'Recipe Saved!' })
                 this.clearAlert();
-                console.log(response)
             })
             .catch(err => console.log(err))
     }
@@ -40,6 +47,12 @@ class Recipe extends Component {
             background: `url(${this.props.image}) no-repeat center`,
             backgroundSize: "cover"
         }
+        // Check to see if this components voiceIndex matches the voice command
+        // eslint-disable-next-line
+        if (this.props.getVoiceIndex == this.props.voiceIndex) {
+            this.activeRecipe();
+        }
+
         return (
             <div>
                 {this.state.alert ? <Alert mainPage={true} msg={this.state.alert} /> : null }
@@ -50,7 +63,7 @@ class Recipe extends Component {
                             <div style={recipeImg}></div>
                         </div>
                         <div className="recipe-prev-text">
-                            <h5>{this.props.title}</h5>
+                            <h5>{this.props.voiceIndex}. {this.props.title}</h5>
                             <CookCloseBtn onOpen={this.activeRecipe} isActive={this.state.active}/>
                             {!this.props.isAuthed ? null 
                                 : 
@@ -63,6 +76,7 @@ class Recipe extends Component {
                         {!this.state.active ? null
                             :
                                 <RecipeInstructions
+                                    index={this.props.voiceIndex}
                                     onClose={this.activeRecipe}
                                     ingredients={this.props.ingredients}
                                     instructions={this.props.instructions} />
@@ -75,4 +89,18 @@ class Recipe extends Component {
     }
 }
 
-export default Recipe;
+const mapStateToProps = state => {
+
+    return {
+        getVoiceIndex: state.searchReducer.recipeIndex
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onVoiceSetIndex: voiceIndex => dispatch(actions.selectRecipe(voiceIndex))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

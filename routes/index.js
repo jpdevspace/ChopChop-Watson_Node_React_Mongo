@@ -37,9 +37,13 @@ router.put('/save', (req, res) => {
 
 // Load user's recipes
 router.get('/dashboard/:userId', (req, res) => {
-    User.findById(req.params.userId)
+    const userId = req.params.userId;
+    if (userId !== null) {
+        User.findById(userId)
         .then(userDB => res.send(userDB))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) 
+    } 
+
 }) 
 
 // Remove recipes
