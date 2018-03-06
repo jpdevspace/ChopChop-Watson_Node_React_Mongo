@@ -1,4 +1,7 @@
 @import "_config.scss";
+body {
+    font-family: $mainFont;
+}
 
 nav {
     box-shadow: 8px 8px 4px rgba(50, 50, 50, 0.7);
@@ -41,7 +44,7 @@ nav {
         border-radius: 35px;
         border: 0;
         box-shadow: 8px 8px 4px rgba(50, 50, 50, 0.7);
-        font-family: $handWrittenFont;
+        font-family: $mainFont;
         font-size: 1.4em;
         color: #666;
     }
@@ -108,6 +111,7 @@ nav {
         div {
             width: 100%;
             height: 100%;
+            background-size: "cover";
         }
     }
 
@@ -175,7 +179,7 @@ nav {
             border-radius: 35px;
             border: 0;
             box-shadow: 4px 4px 2px rgba(50, 50, 50, 0.7);
-            font-family: $handWrittenFont;
+            font-family: $mainFont;
             font-size: 1.4em;
             color: #666;
             margin-top: 1.5em;
@@ -198,7 +202,7 @@ nav {
             border-radius: 35px;
             border: 0;
             box-shadow: 4px 4px 2px rgba(50, 50, 50, 0.7);
-            font-family: $handWrittenFont;
+            font-family: $mainFont;
             font-size: 1.4em;
             color: #666;
             margin-top: 1.5em;

@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Alert = props => {
-
     return(
         <div>
             <div 
-                class="custom-alert"
                 data-main={props.mainPage ? 'mainPage' : null}
-                className="alert alert-warning alert-dismissible fade show" 
+                className="custom-alert alert alert-warning alert-dismissible fade show" 
                   role="alert">
                     {props.msg}
                 <button 
@@ -20,8 +18,6 @@ const Alert = props => {
             </div>
         </div>
     );
-
-
 }
 
 

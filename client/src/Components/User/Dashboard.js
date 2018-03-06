@@ -40,7 +40,7 @@ class Dashboard extends Component {
             .catch(err => console.log(err))
     }
 
-    // Function to handle recipes markes as completed
+    // Function to handle recipes marked as completed
     handleRecipeCmpl = (recipeTitle) => {
         const userId = this.state.userId
         const recipeInfo = { userId, recipeTitle };

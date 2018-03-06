@@ -26,6 +26,8 @@ Users can search for recipes using 4 different key ingredients: chicken, pasta, 
 * [Web Speech API](https://www.nytimes.com/)
 * [Redux](https://redux.js.org/)
 * [React-Router-DOM](https://reacttraining.com/react-router/)
+* [PassportJS](http://www.passportjs.org/)
+* [JWT - JSON Web Tokens](https://jwt.io/)
 * [Sass](https://sass-lang.com/)
 * [JavaScript](https://www.javascript.com/)
 * [HTML](https://www.w3.org/TR/html5/)
