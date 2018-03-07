@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const morgan = require('morgan');
 const passport = require('passport');
 const cors = require('cors');
 
@@ -15,17 +14,10 @@ const PORT = process.env.PORT || 3001;
 // Init Express Web Server
 const app = express();
 
-// DB Setup
-mongoose.Promise = global.Promise;
-mongoose.connect(config.database);
-
 // Static Folder
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// Middleware: Morgan (for debugging http requests)
-app.use(morgan('combined'));
 
 // Allow CORS
 app.use(cors());
@@ -33,6 +25,10 @@ app.use(cors());
 // Middleware: BodyParser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// DB Setup
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database);
 
 // Handle routes
 app.use('/', routes);
