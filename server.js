@@ -9,6 +9,9 @@ const cors = require('cors');
 const config = require('./config/config');
 const routes = require("./routes");
 
+// Setting up a port
+const PORT = process.env.PORT || 3001;
+
 // Init Express Web Server
 const app = express();
 
@@ -38,9 +41,6 @@ app.use('/', routes);
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
-// Setting up a port
-const PORT = process.env.PORT || 3001;
 
 // Starting Web Server
 app.listen( PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`) );
