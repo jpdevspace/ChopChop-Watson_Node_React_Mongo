@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Middleware: Morgan (for debugging http requests)
-app.use(morgan('combine'));
+app.use(morgan('combined'));
 
 // Allow CORS
 app.use(cors());
