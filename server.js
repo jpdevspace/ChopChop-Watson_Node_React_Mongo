@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 // DB Setup
 mongoose.Promise = global.Promise;
-mongoose.connect(config.database);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/cheffW");
 
 // Handle routes
 app.use('/', routes);
