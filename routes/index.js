@@ -78,5 +78,25 @@ router.put('/dashboard/complete', (req, res) => {
         .catch(err => console.log(err))
 })
 
+// Save comment
+router.post('/dashboard/comment', (req, res) => {
+    console.log(req.body)
+    const userId = req.body.userId;
+    const recipeTitle = req.body.recipeTitle;
+    const comment = req.body.comment;
+
+    User.findById(userId)
+        .then(user => {
+            user.recipes.forEach(recipe => {
+                if (recipe.title == recipeTitle) {
+                    recipe.comments.push(comment); 
+                    res.send(recipe.comments)
+                    user.save();
+                }
+            })
+        })
+        .catch(err => console.log(err))
+})
+
 
 module.exports = router;

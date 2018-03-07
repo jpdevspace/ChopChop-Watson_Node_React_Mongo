@@ -34,6 +34,7 @@ class Dashboard extends Component {
                     recipes: response.data.recipes,
                     recipesQ: response.data.recipes.length,
                     completedQ: completedCount.length,
+                    
                     alert: `Welcome back ${response.data.name}!`
                 })
                 this.clearAlert();
@@ -105,6 +106,7 @@ class Dashboard extends Component {
                             <div className="container">
                                 <UserBody 
                                     recipes={this.state.recipes} 
+                                    userId={this.state.userId}
                                     onCompleteRecipe={this.updateCompletedCount}
                                     onRecipeRmv={this.handleRecipeRmv}
                                     onRecipeCmpl={this.handleRecipeCmpl}

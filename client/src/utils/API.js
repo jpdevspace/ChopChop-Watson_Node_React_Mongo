@@ -14,5 +14,7 @@ export default {
     // Remove recipes
     removeRecipe: recipeInfo => axios.put('/dashboard/remove', recipeInfo),
     // Mark recipe as completed
-    completeRecipe: recipeInfo => axios.put('/dashboard/complete', recipeInfo)
+    completeRecipe: recipeInfo => axios.put('/dashboard/complete', recipeInfo),
+    // Save comment in database
+    saveComment: newComment => axios.post('/dashboard/comment', newComment)
 }

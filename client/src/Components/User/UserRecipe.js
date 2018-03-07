@@ -4,11 +4,17 @@ import React, { Component } from 'react';
 
 import CookCloseBtn from '../Search/CookCloseBtn';
 import RecipeInstructions from '../Search/RecipeInstructions';
+import CreateComment from './CreateComment';
+
+// AXIOS
+import API from '../../utils/API';
 
 class UserRecipe extends Component {
     state = { 
         active: false, 
-        completed: this.props.recipeCmpled
+        completed: this.props.recipeCmpled,
+        createComment: false,
+        comments: this.props.comments
     }
     
     // Function to open/close cooking instructions
@@ -18,6 +24,24 @@ class UserRecipe extends Component {
     handleRecipeCompleted = recipeTitle => {
         this.props.onRecipeCmpl(recipeTitle);
         this.setState({ completed: true })
+    }
+
+    handleCreateComment = comment => {
+        const recipeTitle = this.props.recipeTitle;
+        const userId = this.props.userId;
+        const newComment = { userId, recipeTitle, comment }
+        // Save Comment in Database
+        API.saveComment(newComment)
+            .then(response => {
+                this.setState({ comments: response.data })
+                this.openAndCloseComment();
+            })
+            .catch( err => console.log(err))
+    }
+
+    // Function to open and close comment section
+    openAndCloseComment = () => {
+        this.setState({ createComment: !this.state.createComment })
     }
 
     render() {
@@ -39,14 +63,24 @@ class UserRecipe extends Component {
                             <i className="fas fa-check"></i>
                         </button>
                         <button 
+                            onClick={this.openAndCloseComment}
+                            className="open-comment-btn">Comment
+                            <i className="fas fa-pencil-alt"></i>
+                        </button>
+                        <button 
                             onClick={() => this.props.onRecipeRmv(this.props.recipeTitle)} 
                             className="remove-btn">Remove 
                             <i className="far fa-trash-alt"></i>
                         </button>
                     </div>
+                    {!this.state.createComment ? null
+                        : <CreateComment onCreateComment={this.handleCreateComment} />
+                    }
+                    
                     {!this.state.active ? null
                         :
                             <RecipeInstructions
+                                comments={this.state.comments}
                                 onClose={this.activeRecipe}
                                 ingredients={this.props.recipeIngredients}
                                 instructions={this.props.recipeInstructions} />

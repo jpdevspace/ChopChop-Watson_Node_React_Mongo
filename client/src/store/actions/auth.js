@@ -34,7 +34,6 @@ export const authSignUp = (name, email, password) => {
         const newUser = { name, email, password };
         API.userSignup(newUser)
             .then(response => {
-                console.log(response)
                 const userName = response.data.userInfo.name;
                 const userToken = response.data.userInfo.token;
                 const userId = response.data.userInfo.userId;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class RecipeInstructions extends Component {
+
     render() {
 
         const ingredient = this.props.ingredients.map(
@@ -12,12 +13,27 @@ class RecipeInstructions extends Component {
             (value, index) => { 
                 return <li key={index}>{value}</li> 
             })
+        
+        let comments = 'No comments added yet..';
+        if (this.props.comments.length > 0 ) {
+            comments = this.props.comments.map(
+                (value, index) => { 
+                    return <li key={index}>{value}</li> 
+                })
+        }
+
 
         return (
             <div className="recipe-details">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <h3 className="modal-title">Ingredients:</h3>
+                        <div className="comments">
+                            <h3 className="modal-title">Comments:</h3>
+                                <ul>
+                                    {comments}
+                                </ul>
+                            <h3 className="modal-title">Ingredients:</h3>
+                        </div>
                         <ul>
                             {ingredient}
                         </ul>

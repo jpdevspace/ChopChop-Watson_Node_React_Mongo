@@ -275,8 +275,38 @@ nav {
     }
 
     button > .fa-check,
-    button > .fa-trash-alt {
+    button > .fa-trash-alt,
+    button > .fa-pencil-alt {
         margin-left: 5px;
+    }
+
+    .comment-section {
+        margin: 2em auto;
+
+        .comment-btn {
+            @include Wbuttons($yellow, $yellowHover);
+            margin: 0 auto;
+        }
+
+        textarea {
+            background: $yellowPad url('../imgs/yellowPadlg.png') no-repeat center;
+            background-size: cover;
+            border-width: 8px 0 0 0;
+            border-color: #444;
+            padding: 1em;
+            width: 16em;
+        }
+
+    }
+
+    .open-comment-btn {
+        @include Wbuttons(#FFF, $yellow);
+        color: $yellow;
+        border: 1px solid $yellow; 
+        margin: 1em auto;
+        &:hover {
+            color: #FFF;
+        }
     }
     
 }

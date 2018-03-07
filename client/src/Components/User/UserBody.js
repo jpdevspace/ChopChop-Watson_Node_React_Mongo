@@ -22,6 +22,8 @@ class UserBody extends Component {
                 return (
                     <UserRecipe 
                         key={index}
+                        userId={this.props.userId}
+                        comments={recipe.comments}
                         recipeIngredients={recipe.ingredients}
                         recipeInstructions={recipe.instructions}
                         recipeId={recipe._id}
