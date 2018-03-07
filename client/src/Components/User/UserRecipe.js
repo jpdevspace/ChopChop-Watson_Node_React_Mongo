@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Component 
 
 import CookCloseBtn from '../Search/CookCloseBtn';
-import RecipeInstructions from '../Search/RecipeInstructions';
+import UserRecipeInstructions from './UserRecipeInstructions';
 import CreateComment from './CreateComment';
 
 // AXIOS
@@ -79,7 +79,7 @@ class UserRecipe extends Component {
                     
                     {!this.state.active ? null
                         :
-                            <RecipeInstructions
+                            <UserRecipeInstructions
                                 comments={this.state.comments}
                                 onClose={this.activeRecipe}
                                 ingredients={this.props.recipeIngredients}

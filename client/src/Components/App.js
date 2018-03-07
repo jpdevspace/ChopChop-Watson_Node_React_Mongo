@@ -12,7 +12,8 @@ import SearchMain from './Containers/SearchMain';
 import Signup from './Containers/Auth/Signup';
 import Signin from './Containers/Auth/Signin';
 import Dashboard from './User/Dashboard';
-import Logout from './Containers/Auth/Logout'
+import Logout from './Containers/Auth/Logout';
+import Instructions from './Instructions';
 
 // AXIOS
 // import API from '../utils/API';
@@ -75,6 +76,7 @@ class App extends Component {
                 <Route path="/signin" component={Signin} />
                 <Route path="/dashboard" render={ () => <Dashboard userId={this.props.userId} /> } />
                 <Route path="/logout" component={Logout} />
+                <Route path="/instructions" component={Instructions} />
                 <Route path="/" exact render={ () => <SearchMain onSearch={this.props.onSearchRecipe} /> } />
             </Switch>
         )

@@ -17,16 +17,28 @@ const Nav = props => {
                         ?
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
+                                    <NavLink to="/" exact className="nav-link">Search</NavLink>
+                                </li>
+                                <li className="nav-item">
                                     <NavLink to="/signup" className="nav-link">Register</NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink to="/signin" className="nav-link">Login</NavLink>
                                 </li>
+                                <li className="nav-item">
+                                    <NavLink to="/instructions" className="nav-link">Instructions</NavLink>
+                                </li>
                             </ul>
                         :
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
+                                    <NavLink to="/" exact className="nav-link">Search</NavLink>
+                                </li>
+                                <li className="nav-item">
                                     <NavLink to="/dashboard" className="nav-link">Dashboard</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink to="/instructions" className="nav-link">Instructions</NavLink>
                                 </li>
                                 <li className="nav-item">
                                     <NavLink to="/logout" className="nav-link">Logout</NavLink>
