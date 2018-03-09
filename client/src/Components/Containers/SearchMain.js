@@ -10,8 +10,10 @@ class SearchMain extends Component {
     render() {
         return(
             <div id="main-search">
-                <h1>Cheff W</h1>
-                <SearchBar onSearch={this.props.onSearch} />
+                <section id="search-form">
+                    <h1>Cheff W</h1>
+                    <SearchBar onSearch={this.props.onSearch} />
+                </section>
                 <RecipesList 
                     isAuthed={this.props.isAuthed} 
                     authedUser={this.props.authedUser}

@@ -24,14 +24,9 @@ nav {
 }
 
 #main-search {
-    padding-top: 10em;
-    background: url('../imgs/wooden_board3.png') no-repeat center;
-    background-size: cover;
-    height: 80vh;
 
     h1 {
         text-align: center;
-        margin-bottom: 0.5em;
         font-family: $titleFont;
         font-weight: bold;
     }
@@ -52,6 +47,13 @@ nav {
     #search-btn {
         @include Wbuttons($aqua, $aquaHover);
         margin: 2em auto;        
+    }
+
+    #search-form {
+        background: url('../imgs/wooden_board3.png') no-repeat center;
+        background-size: cover;
+        height: 80vh;
+        padding-top: 13em;
     }
 }
 
@@ -79,7 +81,7 @@ nav {
 }
 
 #search-results {
-    margin-top: 18em;
+    margin-top: 1em;
 }
 
 #dashboard-section {
@@ -98,7 +100,7 @@ nav {
     .recipe-prev-card {
         display: flex;
         flex-flow: row wrap;
-        width: 100%;
+        min-width: 470px;
         box-shadow: 4px 4px 15px rgba(50, 50, 50, 0.3);
         min-height: 234px;
         margin-bottom: 2em;
