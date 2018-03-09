@@ -1,10 +1,8 @@
 # Cheff Watson
 
-Finally an app that you can really use while cooking, say bye to messing up your phone with food while you try to scroll down to follow the recipe
+Finally an app that you can really use while cooking, say bye to messing up your phone with food while you try to scroll down to follow the recipe. When prompted by the app, please allow the use of your built-in microphone for a better experience
 
-## See it live on: 
-
-
+## See it live on: https://cheffw.herokuapp.com/
 
 ![alt text][screenshot]
 
