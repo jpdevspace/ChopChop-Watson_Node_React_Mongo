@@ -21,6 +21,3 @@ yarn-error.log*
 
 # dotenv env variables
 .env
-
-# Config
-/config

@@ -37,6 +37,9 @@ class App extends Component {
                 .map(result => result[0])
                 .map(result => result.transcript)
                 .join('')
+
+            // DEBUGGING
+            console.log(transcript);
             // Check for keywords
             const ingredients = ['chicken', 'beef', 'pasta', 'fish'];
             const voiceIndex = ['1', '2', '3', '4', '5'];

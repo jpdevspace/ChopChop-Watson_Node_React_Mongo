@@ -13,26 +13,26 @@ const Instructions = () => {
             <p>If you would like to stick to regular keyboard and mouse navigation, no worries. you can!</p>
             <h3>List of available voice commands</h3>
             <p>Voice commands are only available in the main screen, just <em>say</em> it</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active bg-info">To search for recipes by ingredient:</a>
-                <a href="#" class="list-group-item list-group-item-action">"Chicken"</a>
-                <a href="#" class="list-group-item list-group-item-action">"Beef"</a>
-                <a href="#" class="list-group-item list-group-item-action">"Fish"</a>
-                <a href="#" class="list-group-item list-group-item-action disabled">"Pasta"</a>
+            <div className="list-group">
+                <a href="/instructions" className="list-group-item list-group-item-action active bg-info">To search for recipes by ingredient:</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"Chicken"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"Beef"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"Fish"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action disabled">"Pasta"</a>
             </div>
             <br />
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active bg-info">To scroll the page:</a>
-                <a href="#" class="list-group-item list-group-item-action">"Scroll down"</a>
-                <a href="#" class="list-group-item list-group-item-action">"Scroll up"</a>
+            <div className="list-group">
+                <a href="/instructions" className="list-group-item list-group-item-action active bg-info">To scroll the page:</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"Scroll down"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"Scroll up"</a>
             </div>
             <br />
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active bg-info">To open a specific recipe that you like, just say the number of the recipe</a>
-                <a href="#" class="list-group-item list-group-item-action">"1"</a>
-                <a href="#" class="list-group-item list-group-item-action">"2"</a>
-                <a href="#" class="list-group-item list-group-item-action">"3"</a>
-                <a href="#" class="list-group-item list-group-item-action">You get the idea...</a>
+            <div className="list-group">
+                <a href="/instructions" className="list-group-item list-group-item-action active bg-info">To open a specific recipe that you like, just say the number of the recipe</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"1"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"2"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">"3"</a>
+                <a href="/instructions" className="list-group-item list-group-item-action">You get the idea...</a>
             </div>
             <br />
             <h3 className="text-center">Happy Cooking!!!</h3>

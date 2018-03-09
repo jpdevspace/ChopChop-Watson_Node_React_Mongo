@@ -6,7 +6,7 @@
 /coverage
 
 # production
-/build
+#/build
 
 # misc
 .DS_Store
@@ -21,6 +21,3 @@ yarn-error.log*
 
 # dotenv env variables
 .env
-
-# Cheff Static
-/cheff
