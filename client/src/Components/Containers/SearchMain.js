@@ -12,7 +12,7 @@ class SearchMain extends Component {
             <div id="main-search">
                 <section id="search-form">
                     <h1>Cheff W</h1>
-                    <SearchBaar onSearch={this.props.onSearch} />
+                    <SearchBar onSearch={this.props.onSearch} />
                 </section>
                 <RecipesList 
                     isAuthed={this.props.isAuthed} 
